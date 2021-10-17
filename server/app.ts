@@ -1,20 +1,36 @@
 // app.ts
 import express, { Request, Response } from 'express'
+import {
+  ConnectionOptions,
+  createConnection,
+  getConnectionOptions,
+} from 'typeorm'
+import { createDatabase } from 'typeorm-extension'
+;import { HotelController } from './controllers/hotel.controller';
+(async () => {
+  const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
+  createDatabase({ ifNotExist: true }, connectionOptions)
+    .then(() => console.log('Database created successfully!'))
+    .then(createConnection)
+    .then(async () => {
+      // APP SETUP
+      const hotelController = new HotelController()
+      const app = express(),
+        port = process.env.PORT || 3000
 
-// APP SETUP
-const app = express(),
-  port = process.env.PORT || 3000
+      // MIDDLEWARE
+      app.use(express.json()) // for parsing application/json
+      app.use('/hotels', hotelController.router)
 
-// MIDDLEWARE
-app.use(express.json()) // for parsing application/json
+      // ROUTES
+      app.get('/', (request: Request, response: Response) => {
+        response.send(`Welcome, just know: you matter!`)
+      })
 
-// ROUTES
-app.get('/', (request: Request, response: Response) => {
-  response.send(`Welcome, just know: you matter!`)
-})
-
-// APP START
-app.listen(port, () => {
-  console.info(`\nServer 👾 \nListening on http://localhost:${port}/`)
-})
-
+      // APP START
+      app.listen(port, () => {
+        console.info(`\nServer 👾 \nListening on http://localhost:${port}/`)
+      })
+    })
+    .catch(error => console.error(error)) // If it crashed anywhere, let's log the error!
+})()

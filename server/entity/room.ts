@@ -1,0 +1,32 @@
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { Hotel } from './hotel'
+import { RoomType } from './roomType'
+
+@Entity('room')
+export class Room {
+  @PrimaryGeneratedColumn('uuid')
+  roomId?: string
+
+  @Column('text')
+  roomName?: string
+
+  @Column('text')
+  description?: string
+
+  @Column('decimal')
+  currentPrice?: number
+
+  @ManyToOne(() => RoomType)
+  @JoinColumn({ name: 'roomTypeId' })
+  roomType?: RoomType
+
+  @ManyToOne(() => Hotel)
+  @JoinColumn({name: "hotelId"})
+  hotel?: Hotel
+}
