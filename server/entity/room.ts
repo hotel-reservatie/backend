@@ -2,11 +2,16 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Hotel } from './hotel'
+import { Review } from './review'
 import { RoomType } from './roomType'
+import { Tag } from './tag'
 
 @Entity('room')
 export class Room {
@@ -29,4 +34,11 @@ export class Room {
   @ManyToOne(() => Hotel)
   @JoinColumn({name: "hotelId"})
   hotel?: Hotel
+
+  @ManyToMany(() => Tag)
+  @JoinTable()
+  tags?: Tag[]
+
+  @OneToMany(() => Review, review => review.room)
+  reviews?: Review[]
 }

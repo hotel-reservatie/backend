@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Country } from "./country"
 
 @Entity("city")
 export class City {
@@ -10,6 +11,10 @@ export class City {
 
     @Column('int')
     postalCode?: number
+
+    @ManyToOne(() => Country)
+    @JoinColumn({name: 'countryId'})
+    country?: Country
 
     
 }
