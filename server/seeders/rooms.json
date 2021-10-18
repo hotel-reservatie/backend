@@ -1,0 +1,49 @@
+[
+  {
+    "roomId": "bd405ff7-300b-11ec-901d-0242ac150003",
+    "roomName": "Familiekamer",
+    "description": "Deze kamer is geschikt voor 3 volwassenen of 2 volwassenen en 2 kinderen. Deze kamer werd in februari 2019 gerenoveerd.",
+    "facilities": [
+      "beddengoed",
+      "(kleding)kast",
+      "airconditioning",
+      "kluisje",
+      "verwarming",
+      "bureau",
+      "tv",
+      "telefoon",
+      "satellietzenders",
+      "flatscreen-tv",
+      "kledingrek",
+      "wekdienst"
+    ],
+    "surface": "18",
+    "currentPrice": "90",
+    "tags": [
+      {
+        "name": "Bathroom"
+      },
+      {
+        "name": "Bath"
+      }
+    ]
+  },
+  {
+    "roomName": "Suite",
+    "description": "Dit is een test suite kamer",
+    "facilities": ["beddengoed", "(kleding)kast"],
+    "surface": "20",
+    "currentPrice": "40",
+    "tags": [
+      {
+        "name": "Bathroom"
+      },
+      {
+        "name": "Bath"
+      },
+      {
+        "name": "Airconditioning"
+      }
+    ]
+  }
+]

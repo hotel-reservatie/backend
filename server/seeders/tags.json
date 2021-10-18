@@ -1,0 +1,22 @@
+[
+  {
+    "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+    "name": "Bathroom"
+  },
+  {
+    "tagId": "923a0976-300d-11ec-901d-0242ac150003",
+    "name": "Bath"
+  },
+  {
+    "tagId": "986fbcd8-300d-11ec-901d-0242ac150003",
+    "name": "Airconditioning"
+  },
+  {
+    "tagId": "a1538cd4-300d-11ec-901d-0242ac150003",
+    "name": "Free WiFi"
+  },
+  {
+    "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+    "name": "Flatscreen-Tv"
+  }
+]

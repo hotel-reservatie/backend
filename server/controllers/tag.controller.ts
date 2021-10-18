@@ -1,23 +1,23 @@
 import { NextFunction, Request, Router, Response } from "express";
 import { getRepository, Repository } from "typeorm";
-import { Room } from "../entity/room";
+import { Tag } from "../entity/tag";
 
 
-export class RoomController {
+export class TagController {
     public router = Router()
 
-    public repository: Repository<Room>
+    public repository: Repository<Tag>
 
     constructor() {
-        this.repository = getRepository(Room)
+        this.repository = getRepository(Tag)
         this.router.get('/', this.all)
     }
 
     all = async(request: Request, response: Response, next: NextFunction) => {
-        const hotels = await this.repository.find({relations: ['roomType', 'tags']})
+        const tags = await this.repository.find()
 
         this.router.get('/', this.all)
 
-        response.send(hotels)
+        response.send(tags)
     }
 }

@@ -23,6 +23,12 @@ export class Room {
   @Column('text')
   description?: string
 
+  @Column('simple-array')
+  facilities?: string[]
+
+  @Column('decimal')
+  surface?: number
+
   @Column('decimal')
   currentPrice?: number
 
@@ -30,7 +36,7 @@ export class Room {
   @JoinColumn({ name: 'roomTypeId' })
   roomType?: RoomType
 
-  @ManyToMany(() => Tag)
+  @ManyToMany(() => Tag, {cascade: true})
   @JoinTable()
   tags?: Tag[]
 
