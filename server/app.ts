@@ -6,21 +6,21 @@ import {
   getConnectionOptions,
 } from 'typeorm'
 import { createDatabase } from 'typeorm-extension'
-;import { HotelController } from './controllers/hotel.controller';
-(async () => {
+import { RoomController } from './controllers/room.controller'
+;(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
     .then(() => console.log('Database created successfully!'))
     .then(createConnection)
     .then(async () => {
       // APP SETUP
-      const hotelController = new HotelController()
+      const roomController = new RoomController()
       const app = express(),
         port = process.env.PORT || 3000
 
       // MIDDLEWARE
       app.use(express.json()) // for parsing application/json
-      app.use('/hotels', hotelController.router)
+      app.use('/hotels', roomController.router)
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {

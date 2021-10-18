@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Favorite } from "./favorite";
 import { Review } from "./review";
 import { Role } from "./role";
 
@@ -29,4 +30,7 @@ export class User {
 
     @OneToMany(() => Review, review => review.user)
     reviews?: Review[]
+
+    @OneToMany(() => Favorite, favorite => favorite.user)
+    favorites?: Favorite[]
 }

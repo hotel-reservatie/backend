@@ -8,7 +8,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Hotel } from './hotel'
 import { Review } from './review'
 import { RoomType } from './roomType'
 import { Tag } from './tag'
@@ -30,10 +29,6 @@ export class Room {
   @ManyToOne(() => RoomType)
   @JoinColumn({ name: 'roomTypeId' })
   roomType?: RoomType
-
-  @ManyToOne(() => Hotel)
-  @JoinColumn({name: "hotelId"})
-  hotel?: Hotel
 
   @ManyToMany(() => Tag)
   @JoinTable()
