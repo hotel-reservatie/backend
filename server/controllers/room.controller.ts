@@ -16,7 +16,6 @@ export class RoomController {
     all = async(request: Request, response: Response, next: NextFunction) => {
         const hotels = await this.repository.find({relations: ['roomType', 'tags']})
 
-        this.router.get('/', this.all)
 
         response.send(hotels)
     }

@@ -6,16 +6,22 @@ import { Tag } from '../entity/tag'
 
 import tags from './tags.json'
 import rooms from './rooms.json'
+import roomtypes from './roomTypes.json'
+import { RoomType } from '../entity/roomType'
 
 const seedDatabase = async (connection: Connection) => {
   const dbIsSeeded = await getRepository(Config).findOne('seeded')
 
   if (dbIsSeeded === undefined) {
-    // const tagsORM = plainToClass(Tag, tags)
 
-    // await connection.manager.save(tagsORM)
-
+    const tagsORM = plainToClass(Tag, tags)
     const roomsORM = plainToClass(Room, rooms)
+    const roomTypeORM = plainToClass(RoomType, roomtypes)
+
+
+
+    await connection.manager.save(tagsORM)
+    await connection.manager.save(roomTypeORM)
     await connection.manager.save(roomsORM)
 
     const seeded = new Config()

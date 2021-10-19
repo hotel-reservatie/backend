@@ -4,8 +4,10 @@ import { Room } from "./room";
 
 @Entity('tag')
 export class Tag {
+    @PrimaryGeneratedColumn('uuid')
+    tagId?: string
 
-    @PrimaryColumn()
+    @Column('text', {unique: true})
     name?: string
 
 }

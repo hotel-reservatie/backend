@@ -10,6 +10,9 @@ export class RoomType {
     @Column('text')
     typeName?: string
 
+    @Column('text')
+    description?: string
+
     @Column()
     capacity?: number
 
