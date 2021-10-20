@@ -1,0 +1,38 @@
+[
+  {
+    "roomName": "Familiekamer",
+    "description": "Deze kamer is geschikt voor 3 volwassenen of 2 volwassenen en 2 kinderen. Deze kamer werd in februari 2019 gerenoveerd.",
+    "facilities": [
+      "beddengoed",
+      "(kleding)kast",
+      "airconditioning",
+      "kluisje",
+      "verwarming",
+      "bureau",
+      "tv",
+      "telefoon",
+      "satellietzenders",
+      "flatscreen-tv",
+      "kledingrek",
+      "wekdienst"
+    ],
+    "images": [
+      "familiekamer-1.jpg",
+      "familiekamer-2.jpg",
+      "familiekamer-3.jpg",
+      "familiekamer-4.jpg"
+
+    ],
+    "surface": "18",
+    "currentPrice": "90",
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  }
+]
