@@ -7,7 +7,9 @@ import { Tag } from '../entity/tag'
 import tags from './tags.json'
 import rooms from './rooms.json'
 import roomtypes from './roomTypes.json'
+import roles from './roles.json'
 import { RoomType } from '../entity/roomType'
+import { Role } from '../entity/role'
 
 const seedDatabase = async (connection: Connection) => {
   const dbIsSeeded = await getRepository(Config).findOne('seeded')
@@ -17,12 +19,12 @@ const seedDatabase = async (connection: Connection) => {
     const tagsORM = plainToClass(Tag, tags)
     const roomsORM = plainToClass(Room, rooms)
     const roomTypeORM = plainToClass(RoomType, roomtypes)
-
-
+    const rolesORM = plainToClass(Role, roles)
 
     await connection.manager.save(tagsORM)
     await connection.manager.save(roomTypeORM)
     await connection.manager.save(roomsORM)
+    await connection.manager.save(rolesORM)
 
     const seeded = new Config()
     seeded.key = 'seeded'

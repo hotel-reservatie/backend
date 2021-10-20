@@ -16,6 +16,13 @@
       "kledingrek",
       "wekdienst"
     ],
+    "images": [
+      "familiekamer-1.jpg",
+      "familiekamer-2.jpg",
+      "familiekamer-3.jpg",
+      "familiekamer-4.jpg"
+
+    ],
     "surface": "18",
     "currentPrice": "90",
     "roomType": {

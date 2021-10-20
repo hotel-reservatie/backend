@@ -26,6 +26,9 @@ export class Room {
   @Column('simple-array')
   facilities?: string[]
 
+  @Column('simple-array')
+  images?: string[]
+
   @Column('decimal')
   surface?: number
 
