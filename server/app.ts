@@ -1,5 +1,8 @@
 // app.ts
 import express, { Request, Response } from 'express'
+import { graphqlHTTP } from 'express-graphql'
+import { GraphQLSchema } from 'graphql'
+import { buildSchema } from 'type-graphql'
 import {
   Connection,
   ConnectionOptions,
@@ -8,15 +11,15 @@ import {
 } from 'typeorm'
 import { createDatabase } from 'typeorm-extension'
 import { RoomController } from './controllers/room.controller'
-;import { TagController } from './controllers/tag.controller';
-import seedDatabase from './seeders/seeder';
-(async () => {
+import { TagController } from './controllers/tag.controller'
+import { RoomResolver } from './resolvers/roomResolver'
+import seedDatabase from './seeders/seeder'
+;(async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
     .then(() => console.log('Database created successfully!'))
     .then(createConnection)
     .then(async (connection: Connection) => {
-
       seedDatabase(connection)
       // APP SETUP
       const roomController = new RoomController()
@@ -33,6 +36,27 @@ import seedDatabase from './seeders/seeder';
       app.get('/', (request: Request, response: Response) => {
         response.send(`Welcome, just know: you matter!`)
       })
+      /**
+       *
+       * @description create the graphql schema with the imported resolvers
+       */
+      let schema: GraphQLSchema = {} as GraphQLSchema
+
+      await buildSchema({
+        resolvers: [RoomResolver],
+      }).then(_ => {
+        schema = _
+      })
+
+      // GraphQL init middleware
+      app.use(
+        '/v1/', // Url, do you want to keep track of a version?
+        graphqlHTTP((request, response) => ({
+          schema: schema,
+          context: { request, response },
+          graphiql: true,
+        })),
+      )
 
       // APP START
       app.listen(port, () => {
