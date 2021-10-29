@@ -12,6 +12,7 @@ import {
 import { createDatabase } from 'typeorm-extension'
 import { RoomController } from './controllers/room.controller'
 import { TagController } from './controllers/tag.controller'
+import { ReviewResolver } from './resolvers/reviewResolver'
 import { RoomResolver } from './resolvers/roomResolver'
 import seedDatabase from './seeders/seeder'
 ;(async () => {
@@ -43,7 +44,7 @@ import seedDatabase from './seeders/seeder'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [RoomResolver],
+        resolvers: [RoomResolver, ReviewResolver],
       }).then(_ => {
         schema = _
       })

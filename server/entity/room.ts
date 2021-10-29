@@ -21,7 +21,7 @@ export class Room {
   @PrimaryGeneratedColumn('uuid')
   roomId?: string
 
-  @Field()
+  @Field({nullable: true})
   @Column('text')
   roomName?: string
 

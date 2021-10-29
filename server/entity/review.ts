@@ -1,6 +1,7 @@
 import { Field, ID, InputType, ObjectType } from 'type-graphql'
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -17,12 +18,12 @@ export class Review {
   @PrimaryGeneratedColumn('uuid')
   reviewId?: string
 
-//   @Field(type => User)
+  //   @Field(type => User)
   @ManyToOne(() => User)
   @JoinColumn({ name: 'userId' })
   user?: User
 
-//   @Field( type => Room)
+  @Field(type => Room)
   @ManyToOne(() => Room)
   @JoinColumn({ name: 'roomId' })
   room?: Room
@@ -35,7 +36,26 @@ export class Review {
   @Column('text')
   title?: string
 
-  @Field()
+  @Field({ nullable: true })
   @Column('text')
   description?: string
+
+  @Field({ nullable: true })
+  @CreateDateColumn({ type: 'timestamp', nullable: true })
+  createdAt?: Date
+}
+
+@InputType('ReviewInput')
+@Entity('review')
+export class ReviewInput extends Review {
+  @Field(type => ReviewRoomInput, {nullable: true})
+  @ManyToOne(() => Room)
+  @JoinColumn({ name: 'roomId' })
+  room?: Room
+}
+
+@InputType('ReviewRoomInput')
+export class ReviewRoomInput {
+  @Field(() => ID, { nullable: true })
+  roomId?: string
 }
