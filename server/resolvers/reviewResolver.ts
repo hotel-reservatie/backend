@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from 'type-graphql'
-import { getRepository, Repository } from 'typeorm'
+import { getRepository, QueryFailedError, Repository } from 'typeorm'
 import { ReviewInput, Review, ReviewRoomInput } from '../entity/review'
 import { Room } from '../entity/room'
 
@@ -11,15 +11,23 @@ export class ReviewResolver {
   async addReview(
     @Arg('data') newReview: ReviewInput,
   ): Promise<Review | undefined | null> {
-    const result = await this.repository
-      .save(newReview)
-      .catch(ex => console.log(ex))
 
-    if (result) {
-      return result
-    } else {
-      return undefined
+    try {
+      const result = await this.repository
+        .save(newReview)
+        .catch((ex: QueryFailedError) => { throw new Error(ex.name) })
+
+      if (result) {
+        return result
+      } else {
+        return undefined
+      }
+    } catch (error) {
+      throw new Error(
+        `Could not create new review. ` + error,
+      )
     }
+
   }
 
   @Mutation(() => Review)
@@ -53,8 +61,8 @@ export class ReviewResolver {
     try {
       const review = await this.repository.findOne(reviewId)
       if (review) {
-          console.log(review);
-          
+        console.log(review);
+
         await this.repository.delete(reviewId)
         return reviewId
       }

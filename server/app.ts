@@ -61,7 +61,7 @@ import seedDatabase from './seeders/seeder'
 
       // APP START
       app.listen(port, () => {
-        console.info(`\nServer 👾 \nListening on http://localhost:${port}/`)
+        console.info(`\nServer 👾 \nListening on http://localhost:${port}/v1/graphql`)
       })
     })
     .catch(error => console.error(error)) // If it crashed anywhere, let's log the error!

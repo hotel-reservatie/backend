@@ -37,7 +37,7 @@ export class Review {
   title?: string
 
   @Field({ nullable: true })
-  @Column('text')
+  @Column('text', {nullable: true})
   description?: string
 
   @Field({ nullable: true })
@@ -48,7 +48,7 @@ export class Review {
 @InputType('ReviewInput')
 @Entity('review')
 export class ReviewInput extends Review {
-  @Field(type => ReviewRoomInput, {nullable: true})
+  @Field(type => ReviewRoomInput)
   @ManyToOne(() => Room)
   @JoinColumn({ name: 'roomId' })
   room?: Room
@@ -56,6 +56,6 @@ export class ReviewInput extends Review {
 
 @InputType('ReviewRoomInput')
 export class ReviewRoomInput {
-  @Field(() => ID, { nullable: true })
+  @Field(() => ID)
   roomId?: string
 }
