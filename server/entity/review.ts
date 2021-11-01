@@ -18,7 +18,7 @@ export class Review {
   @PrimaryGeneratedColumn('uuid')
   reviewId?: string
 
-  //   @Field(type => User)
+  @Field(type => User, { nullable: true })
   @ManyToOne(() => User)
   @JoinColumn({ name: 'userId' })
   user?: User
@@ -37,7 +37,7 @@ export class Review {
   title?: string
 
   @Field({ nullable: true })
-  @Column('text')
+  @Column('text', { nullable: true })
   description?: string
 
   @Field({ nullable: true })
@@ -45,17 +45,42 @@ export class Review {
   createdAt?: Date
 }
 
-@InputType('ReviewInput')
+@InputType('NewReviewInput')
 @Entity('review')
 export class ReviewInput extends Review {
-  @Field(type => ReviewRoomInput, {nullable: true})
+  @Field(type => ReviewRoomInput)
   @ManyToOne(() => Room)
   @JoinColumn({ name: 'roomId' })
   room?: Room
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'userId' })
+  user?: User
+
+}
+
+@InputType('ReviewUpdateInput')
+@Entity('review')
+export class ReviewUpdateInput extends Review {
+
+  @Field(type => ReviewRoomInput, { nullable: true })
+  @ManyToOne(() => Room)
+  @JoinColumn({ name: 'roomId' })
+  room?: Room
+
+  @Field({ nullable: true })
+  @Column('int')
+  reviewScore?: number
+
+  @Field({ nullable: true })
+  @Column('text')
+  title?: string
+
 }
 
 @InputType('ReviewRoomInput')
 export class ReviewRoomInput {
-  @Field(() => ID, { nullable: true })
+  @Field(() => ID)
   roomId?: string
 }
+
