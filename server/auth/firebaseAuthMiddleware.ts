@@ -28,9 +28,8 @@ async function authMiddleware(
             next()
         })
         .catch(error => {
-            console.log(error)
-
-            return response.send({ message: 'Could not authorize' }).status(403)
+            response.status(403)
+            return response.send(error)
         })
 }
 
