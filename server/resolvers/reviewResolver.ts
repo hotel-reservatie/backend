@@ -6,6 +6,21 @@ import { ReviewInput, Review, ReviewRoomInput, ReviewUpdateInput } from '../enti
 export class ReviewResolver {
   repository: Repository<Review> = getRepository(Review)
 
+  @Query(() => [Review])
+  async getRoomReviews(@Arg('roomId') roomId: String): Promise<Review[] | undefined | null> {
+    const reviews = await this.repository.find({ where: { room: roomId }, relations: ['user'] })
+
+    return reviews
+  }
+
+  @Authorized()
+  @Query(() => [Review], { nullable: true })
+  async getUserReviews(@Ctx() context): Promise<Review[] | undefined | null> {
+
+    const reviews = await this.repository.find({ where: { user: context.request.currentUser.uid }, relations: ['room'] })
+
+    return reviews
+  }
 
   @Authorized()
   @Mutation(() => Review, { nullable: true })
@@ -47,7 +62,6 @@ export class ReviewResolver {
     try {
       const review: Review | undefined = await this.repository.findOne(reviewId, { relations: ['user'] })
 
-
       if (review) {
 
         if (review.user.userId == context.request.currentUser.uid) {
@@ -71,15 +85,14 @@ export class ReviewResolver {
     }
   }
 
+  @Authorized()
   @Mutation(() => String)
   async deleteReview(@Arg('reviewId') reviewId: string, @Ctx() context) {
     try {
-      const review = await this.repository.findOne(reviewId)
+      const review = await this.repository.findOne(reviewId, { relations: ['user'] })
       if (review) {
         if (review.user.userId == context.request.currentUser.uid) {
 
-          console.log(review);
-  
           await this.repository.delete(reviewId)
           return reviewId
         }
