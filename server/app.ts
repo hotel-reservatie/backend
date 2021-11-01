@@ -30,13 +30,15 @@ import authMiddleware from './auth/firebaseAuthMiddleware'
     .then(() => console.log('Database created successfully!'))
     .then(createConnection)
     .then(async (connection: Connection) => {
-      seedDatabase(connection)
-
-      // APP SETUP
       dotenv.config()
       initializeApp({
         credential: admin.credential.applicationDefault()
       })
+      seedDatabase(connection)
+
+      // APP SETUP
+      
+      
       const roomController = new RoomController()
       const tagController = new TagController()
       const authController = new AuthController()
