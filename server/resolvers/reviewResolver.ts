@@ -1,18 +1,25 @@
-import { Arg, Mutation, Query, Resolver } from 'type-graphql'
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from 'type-graphql'
 import { getRepository, QueryFailedError, Repository } from 'typeorm'
-import { ReviewInput, Review, ReviewRoomInput } from '../entity/review'
-import { Room } from '../entity/room'
+import { ReviewInput, Review, ReviewRoomInput, ReviewUpdateInput } from '../entity/review'
 
 @Resolver()
 export class ReviewResolver {
   repository: Repository<Review> = getRepository(Review)
 
+
+  @Authorized()
   @Mutation(() => Review, { nullable: true })
   async addReview(
     @Arg('data') newReview: ReviewInput,
+    @Ctx() context
   ): Promise<Review | undefined | null> {
 
+    console.log("Context: ", context);
+
     try {
+
+      newReview.user = { userId: context.request.currentUser.uid }
+
       const result = await this.repository
         .save(newReview)
         .catch((ex: QueryFailedError) => { throw new Error(ex.name) })
@@ -30,22 +37,30 @@ export class ReviewResolver {
 
   }
 
+  @Authorized()
   @Mutation(() => Review)
   async updateReview(
     @Arg('reviewId') reviewId: string,
-    @Arg('data') updatedReview: ReviewInput,
+    @Arg('data') updatedReview: ReviewUpdateInput,
+    @Ctx() context
   ): Promise<Review | undefined | null> {
     try {
-      const review: Review | undefined = await this.repository.findOne(reviewId)
+      const review: Review | undefined = await this.repository.findOne(reviewId, { relations: ['user'] })
+
 
       if (review) {
-        await this.repository.update(reviewId, updatedReview)
 
-        const resAfterUpdate = await this.repository.findOne(reviewId, {
-          relations: ['room'],
-        })
+        if (review.user.userId == context.request.currentUser.uid) {
+          await this.repository.update(reviewId, updatedReview)
 
-        return resAfterUpdate
+          const resAfterUpdate = await this.repository.findOne(reviewId, {
+            relations: ['room', 'user'],
+          })
+
+          return resAfterUpdate
+        }
+
+        throw new Error('Cannot update a review that is not yours!')
       }
 
       throw new Error('Review Not Found')
@@ -57,14 +72,19 @@ export class ReviewResolver {
   }
 
   @Mutation(() => String)
-  async deleteReview(@Arg('reviewId') reviewId: string) {
+  async deleteReview(@Arg('reviewId') reviewId: string, @Ctx() context) {
     try {
       const review = await this.repository.findOne(reviewId)
       if (review) {
-        console.log(review);
+        if (review.user.userId == context.request.currentUser.uid) {
 
-        await this.repository.delete(reviewId)
-        return reviewId
+          console.log(review);
+  
+          await this.repository.delete(reviewId)
+          return reviewId
+        }
+
+        throw new Error('Cannot delete a review that is not yours!')
       }
       throw new Error('Not Found')
     } catch (error) {

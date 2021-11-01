@@ -9,7 +9,6 @@ import rooms from './rooms.json'
 import roomtypes from './roomTypes.json'
 import roles from './roles.json'
 import { RoomType } from '../entity/roomType'
-import { Role } from '../entity/role'
 import { auth } from 'firebase-admin'
 import { User } from '../entity/user'
 import { UserRecord } from 'firebase-admin/auth'
@@ -25,7 +24,6 @@ const seedDatabase = async (connection: Connection) => {
     const tagsORM = plainToClass(Tag, tags)
     const roomsORM = plainToClass(Room, rooms)
     const roomTypeORM = plainToClass(RoomType, roomtypes)
-    const rolesORM = plainToClass(Role, roles)
 
 
 
@@ -33,7 +31,6 @@ const seedDatabase = async (connection: Connection) => {
     await connection.manager.save(tagsORM)
     await connection.manager.save(roomTypeORM)
     await connection.manager.save(roomsORM)
-    await connection.manager.save(rolesORM)
 
     const seeded = new Config()
     seeded.key = 'seeded'
@@ -69,9 +66,6 @@ const seedUsers = async () => {
         .catch((e) => {
           console.log(`Could not insert user: ${e}`);
         })
-
-
-
     }
   })
 }

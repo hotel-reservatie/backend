@@ -1,9 +1,13 @@
 import { NextFunction, request, Request, Response, Router } from 'express'
 import { auth } from 'firebase-admin'
 import { getAuth } from 'firebase-admin/auth'
+import { getRepository, Repository } from 'typeorm'
+import { User } from '../entity/user'
 
 export class AuthController {
   public router = Router()
+
+  public userRepository: Repository<User> = getRepository(User)
 
   constructor() {
     this.router.post('/signup', this.signup)
@@ -23,13 +27,27 @@ export class AuthController {
       }
       //Users with howest email get admin rights
       if (user.email && user.email.endsWith('@howest.be')) {
-        customClaims.admin = false
+        customClaims.admin = true
       }
       try {
         await getAuth().setCustomUserClaims(user.uid, customClaims)
       } catch (error) {
         console.log(error)
       }
+
+      const u: User = new User()
+
+      u.userId = user.uid
+      u.userName = user.displayName
+      u.email = user.email
+      u.phone = user.phoneNumber
+      u.admin = customClaims.admin
+
+      await this.userRepository.save(u)
+        .then(() => console.log("Added new user to database: ", u))
+        .catch((e) => {
+          console.log(`Could not insert user: ${e}`);
+        })
 
       return response.json(user)
     } catch (error) {

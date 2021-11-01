@@ -11,12 +11,13 @@ export const customAuthChecker: AuthChecker<Context> = async ({ context }) =>
 
     const repository: Repository<User> = getRepository(User)
 
-    const user = await repository.findOne(
-        context.request.currentUser.uid,
-    )
-
-    if (user) {
-        return true
+    if (context.request.currentUser) {
+        const user = await repository.findOne(
+            context.request.currentUser.uid,
+        )
+        if (user) {
+            return true
+        }
     }
 
     return false
