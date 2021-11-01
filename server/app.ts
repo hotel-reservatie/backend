@@ -24,6 +24,7 @@ import dotenv from 'dotenv'
 import { AuthController } from './controllers/auth.controller'
 import { customAuthChecker } from './auth/customchecker'
 import authMiddleware from './auth/firebaseAuthMiddleware'
+import { FavoriteResolver } from './resolvers/favoriteResolver'
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
@@ -37,7 +38,6 @@ import authMiddleware from './auth/firebaseAuthMiddleware'
       seedDatabase(connection)
 
       // APP SETUP
-      
       
       const roomController = new RoomController()
       const tagController = new TagController()
@@ -66,7 +66,7 @@ import authMiddleware from './auth/firebaseAuthMiddleware'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [RoomResolver, ReviewResolver],
+        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver],
         authChecker: customAuthChecker
       }).then(_ => {
         schema = _
