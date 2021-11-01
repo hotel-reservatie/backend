@@ -11,7 +11,6 @@ async function authMiddleware(
 
     if (!headerToken) {
         console.log("Anonymous request");
-        
         next()
         return
     }

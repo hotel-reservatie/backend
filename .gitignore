@@ -126,5 +126,5 @@ dist
 # Serverless Webpack directories
 .webpack/
 
-
+server\auth\application-credentials.json
 # End of https://www.toptal.com/developers/gitignore/api/node
