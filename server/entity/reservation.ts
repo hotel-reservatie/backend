@@ -1,27 +1,48 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, InputType, ObjectType } from "type-graphql";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Room, RoomRelationInput } from "./room";
+import { RoomReserved } from "./roomReserved";
 import { User } from "./user";
 
+@ObjectType()
+@InputType('ReservationInput')
 @Entity('reservation')
 export class Reservation {
 
+    @Field(() => ID, { nullable: true })
     @PrimaryGeneratedColumn('uuid')
     reservationId?: string
 
+    @Field(type => User, { nullable: true })
     @ManyToOne(() => User)
-    @JoinColumn({name: 'userId'})
+    @JoinColumn({ name: 'userId' })
     user?: User
 
+    @Field(type => Date,{ nullable: true })
     @CreateDateColumn()
     createdAt?: Date
 
-    @Column('date')
+    @Field(type => Date)
+    @Column('datetime')
     startDate?: Date
 
-    @Column('date')
+    @Field(type => Date)
+    @Column('datetime')
     endDate?: Date
 
-    @Column('decimal')
+    @Field({nullable: true})
+    @Column('decimal', {nullable: true})
     totalPrice?: number
 
-    
+    @Field(type => [RoomReserved], {nullable: true})
+    @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation, {cascade: true})
+    roomsReserved?: RoomReserved[]
+
+
+}
+
+@InputType('NewReservationInput')
+export class ReservationInput extends Reservation {
+    @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation)
+    roomsReserved?: RoomReserved[]
 }
