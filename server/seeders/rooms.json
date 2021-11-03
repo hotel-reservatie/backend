@@ -24,6 +24,7 @@
     ],
     "surface": "18",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },
@@ -54,6 +55,7 @@
     ],
     "surface": "25",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },
@@ -84,6 +86,7 @@
     ],
     "surface": "25",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },
@@ -114,6 +117,7 @@
     ],
     "surface": "27",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },
@@ -144,6 +148,7 @@
     ],
     "surface": "25",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },
@@ -175,6 +180,7 @@
     ],
     "surface": "40",
     "currentPrice": "90",
+    "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
     },

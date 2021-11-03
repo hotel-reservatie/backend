@@ -45,6 +45,10 @@ export class Room {
   @Column('decimal')
   currentPrice?: number
 
+  @Field({ nullable: true })
+  @Column('float')
+  weekendMultiplier?: number
+
   @Field(type => RoomType)
   @ManyToOne(() => RoomType)
   @JoinColumn({ name: 'roomTypeId' })

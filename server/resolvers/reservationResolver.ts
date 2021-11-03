@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { getRepository, QueryFailedError, Repository } from "typeorm";
 import { Reservation, ReservationInput } from "../entity/reservation";
 import { Room, RoomRelationInput } from "../entity/room";
@@ -12,32 +12,27 @@ export class ReservationResolver {
     reservedRoomsRepository: Repository<RoomReserved> = getRepository(RoomReserved)
     roomRepository: Repository<Room> = getRepository(Room)
 
+    @Authorized()
     @Query(() => [Reservation])
-    async getReservations() {
-        const res = await this.repository.find({ relations: ['roomsReserved', 'roomsReserved.room'] })
+    async getUserReservations(@Ctx() context): Promise<Reservation[] | undefined | null> {
+        const reservations = await this.repository.find({ where: { user: context.request.currentUser.uid }, relations: ['roomsReserved', 'roomsReserved.room', 'user'] })
 
-        return res
-
-
+        return reservations
     }
 
+    @Authorized()
     @Mutation(() => Reservation)
-    async createReservation(@Arg('data') res: ReservationInput, @Arg('roomIds', type => [String]) roomIds: string[]) {
+    async createReservation(@Ctx() context, @Arg('data') res: ReservationInput, @Arg('roomIds', type => [String]) roomIds: string[]): Promise<Reservation | undefined | null> {
         try {
-
-
             if (await this.validateReservation(roomIds, res)) {
-
                 res.roomsReserved = []
                 res.totalPrice = 0
+                res.user = { userId: context.request.currentUser.uid }
                 await Promise.all(roomIds.map(async (roomId) => {
-                    const roomPrice = await this.calculateRoomPrice(roomIds[0], res.startDate, res.endDate);
+                    const roomPrice = await this.calculateRoomPrice(roomId, res.startDate, res.endDate);
                     res.roomsReserved.push({ room: { roomId: roomId }, price: roomPrice })
                     res.totalPrice += roomPrice
                 }))
-
-                console.log(res);
-                
 
                 const result = await this.repository
                     .save(res)
@@ -51,15 +46,36 @@ export class ReservationResolver {
                         }
                     })
                 if (result) {
-
-                    const resAfterUpdate = await this.repository.findOne({ where: { reservationId: result.reservationId }, relations: ['roomsReserved', 'roomsReserved.room'] })
+                    const resAfterUpdate = await this.repository.findOne({ where: { reservationId: result.reservationId }, relations: ['roomsReserved', 'roomsReserved.room', 'user'] })
                     return resAfterUpdate
                 }
             }
         } catch (error) {
-
             throw new Error(
-                `Failed to create new favorite. ` + error,
+                `Failed to create new reservation. ` + error,
+            )
+        }
+    }
+
+    @Authorized()
+    @Mutation(() => String)
+    async deleteReservation(@Arg('reservationId') reservationId: string, @Ctx() context): Promise<string> {
+        try {
+            const reservation = await this.repository.findOne(reservationId, { relations: ['user'] })
+
+            if (reservation) {
+                if (reservation.user.userId == context.request.currentUser.uid) {
+                    
+                    await this.reservedRoomsRepository.delete({reservation: {reservationId: reservationId}})
+                    await this.repository.delete(reservationId)
+                    return reservationId
+                }
+                throw new Error('Cannot delete a reservation that is not yours!')
+            }
+            throw new Error('Not Found')
+        } catch (error) {
+            throw new Error(
+                `Could not delete review with id ${reservationId} failed. ` + error,
             )
         }
     }
@@ -72,7 +88,7 @@ export class ReservationResolver {
             if (roomIds.includes(r.room.roomId)) {
                 if (this.checkBetweenDates(r.reservation.startDate, r.reservation.endDate, reservation.startDate)
                     || this.checkBetweenDates(r.reservation.startDate, r.reservation.endDate, reservation.endDate)) {
-                    // throw new Error(`One or more rooms you have listed are reserved in this period.`)
+                    throw new Error(`One or more rooms you have listed are reserved in this period.`)
                 }
             }
         })
@@ -85,9 +101,11 @@ export class ReservationResolver {
         const room: Room = await this.roomRepository.findOne(roomId);
 
         if (room) {
-            const amountOfDays = this.daysBetween(startDate, endDate)
-            const totalPrice = amountOfDays * room.currentPrice
+            const amountOfDays = this.daysBetween(startDate, endDate);
+            const amountOfWeekendDays = this.weekendDays(startDate, endDate);
 
+            const amountOfWorkDays = amountOfDays - amountOfWeekendDays;
+            const totalPrice = (amountOfWorkDays * room.currentPrice) + (amountOfWeekendDays * (room.currentPrice * room.weekendMultiplier))
 
             return totalPrice
         }
@@ -105,7 +123,7 @@ export class ReservationResolver {
         return false
     }
 
-    private daysBetween(date1: Date, date2: Date) {
+    private daysBetween(date1: Date, date2: Date): number {
 
         // The number of milliseconds in one day
         const ONE_DAY = 1000 * 60 * 60 * 24;
@@ -116,5 +134,16 @@ export class ReservationResolver {
         // Convert back to days and return
         return Math.round(differenceMs / ONE_DAY);
 
+    }
+
+    private weekendDays(date1: Date, date2: Date): number {
+        var count = 0;
+        const curDate = new Date(date1.getTime());
+        while (curDate <= date2) {
+            const dayOfWeek = curDate.getDay();
+            if (dayOfWeek == 0 || dayOfWeek == 6) count++;
+            curDate.setDate(curDate.getDate() + 1);
+        }
+        return count;
     }
 }

@@ -18,7 +18,7 @@ export class Reservation {
     @JoinColumn({ name: 'userId' })
     user?: User
 
-    @Field(type => Date,{ nullable: true })
+    @Field(type => Date, { nullable: true })
     @CreateDateColumn()
     createdAt?: Date
 
@@ -34,8 +34,8 @@ export class Reservation {
     @Column('decimal', {nullable: true})
     totalPrice?: number
 
-    @Field(type => [RoomReserved], {nullable: true})
-    @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation, {cascade: true})
+    @Field(type => [RoomReserved], { nullable: true })
+    @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation, { cascade: true })
     roomsReserved?: RoomReserved[]
 
 
