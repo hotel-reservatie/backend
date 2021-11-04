@@ -1,0 +1,194 @@
+[
+  {
+    "roomName": "Familiekamer",
+    "description": "Deze kamer is geschikt voor 3 volwassenen of 2 volwassenen en 2 kinderen. Deze kamer werd in februari 2019 gerenoveerd.",
+    "facilities": [
+      "beddengoed",
+      "(kleding)kast",
+      "airconditioning",
+      "kluisje",
+      "verwarming",
+      "bureau",
+      "tv",
+      "telefoon",
+      "satellietzenders",
+      "flatscreen-tv",
+      "kledingrek",
+      "wekdienst"
+    ],
+    "images": [
+      "familiekamer-1.jpg",
+      "familiekamer-2.jpg",
+      "familiekamer-3.jpg",
+      "familiekamer-4.jpg"
+    ],
+    "surface": "18",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Comfort Kamer",
+    "description": "Deze kamer is geschikt voor twee personen. Gelegen op de beganegrond en geschikt voor rolstoelgebruikers. Wie droomt van comfort, komt thuis in een kamer als deze.",
+    "facilities": [
+      "Badkamer met douche, toilet",
+      "Haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning",
+      "Bureau",
+      "Safe",
+      "Rolstoeltoegang"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-1.jpg?alt=media&token=1dc6fe7c-98ec-4ad0-8545-21e8e8c979c6",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=3c6c23d4-f946-46b6-9c69-5cc78306ea98"
+    ],
+    "surface": "25",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Comfort Kamer Mét Tuinzicht",
+    "description": "Comfort in bed en tuinzicht uit het raam. Het beste van twee werelden ...",
+    "facilities": [
+      "Uitzicht op Franse tuin",
+      "Badkamer met douche, toilet en haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning",
+      "Bureau",
+      "Safe",
+      "Rolstoeltoegang"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-1.jpg?alt=media&token=ffdf9d12-c36b-4a64-a9f1-e43c5ce4e36e",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-2.jpg?alt=media&token=b94588c3-c6ab-42e8-b663-e04a21d63c15"
+    ],
+    "surface": "25",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Superior kamer",
+    "description": "Stap met het juiste been uit bed dankzij superieur slaapgenot …",
+    "facilities": [
+      "Badkamer met douche, toilet",
+      "Haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning",
+      "Bureau",
+      "Safe",
+      "Rolstoeltoegang"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-1.jpg?alt=media&token=e233db6b-5b3a-436b-b247-477d31c74579",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=f8bb5bfc-0975-4604-ace3-50b716f4b0dc"
+    ],
+    "surface": "27",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Superior Kamer Mét Tuinzicht",
+    "description": "Zalig indommelen en uitgerust ontwaken met zicht op de tuin. Goeiemorgen!",
+    "facilities": [
+      "Badkamer met douche, toilet",
+      "Haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning",
+      "Bureau",
+      "Safe",
+      "Rolstoeltoegang"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-2.jpg?alt=media&token=bc47b975-d021-4283-a2bc-ed72f13216bf"
+    ],
+    "surface": "25",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Suite",
+    "description": "Mag het wat meer zijn? Profiteer van riante ruimte en een vleugje luxe.",
+    "facilities": [
+      "Badkamer met douche én ligbad",
+      "Apart toilet",
+      "Haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning",
+      "Bureau",
+      "Safe",
+      "Rolstoeltoegang"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-1.jpg?alt=media&token=63c3a48f-c9b2-4d3c-9d22-c8bf0426c94d",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=700b6842-6e2e-4280-aac3-92b8e46877d9"
+    ],
+    "surface": "40",
+    "currentPrice": "90",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      }
+    ]
+  }
+]

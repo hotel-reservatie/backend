@@ -1,0 +1,43 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend Hotel Reservaties",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc && node dist/app.js",
+    "dev": "npx nodemon --watch 'server/**/*' --exec 'ts-node' server/app.ts",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hotel-reservatie/backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hotel-reservatie/backend/issues"
+  },
+  "homepage": "https://github.com/hotel-reservatie/backend#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^7.19.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "firebase-admin": "^10.0.0",
+    "graphql": "^15.7.2",
+    "mysql": "^2.18.1",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.38",
+    "typeorm-extension": "^0.3.0"
+  }
+}

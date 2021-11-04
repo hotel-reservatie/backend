@@ -1,0 +1,12 @@
+[
+    {
+        "roleId": "7d3b7ba4-e4c2-4600-a3c2-16a364339cb7",
+        "roleName": "Admin",
+        "description": "Administrators of the website can get reports and view stats of the hotel."
+    },
+    {
+        "roleId": "ac38e17d-f311-4b22-9162-4105096e1418",
+        "roleName": "User",
+        "description": "Users can view and book rooms. They can also place reviews"
+    }
+]

@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  mariadb:
+    image: mariadb:10.5.12
+    ports: 
+      - 3306:3306
+    env_file:
+      - .env
+    volumes:
+      - database:/var/lib/mysql
+  adminer:
+    image: adminer:4.8.1
+    ports: 
+      - 9999:8080
+
+volumes:
+  database:
