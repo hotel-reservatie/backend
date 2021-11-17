@@ -21,4 +21,15 @@ export class RoomType {
     @Column()
     capacity?: number
 
+    @Field({nullable: true})
+    @Column('text')
+    sampleImage?: string
+
+}
+
+@ObjectType()
+@InputType('RoomTypeResponse')
+export class RoomTypeResponse extends RoomType {
+    @Field({nullable: true})
+    startingPrice?: number
 }

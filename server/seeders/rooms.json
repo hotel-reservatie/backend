@@ -23,7 +23,7 @@
       "familiekamer-4.jpg"
     ],
     "surface": "18",
-    "currentPrice": "90",
+    "currentPrice": "150",
     "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
@@ -54,10 +54,10 @@
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=3c6c23d4-f946-46b6-9c69-5cc78306ea98"
     ],
     "surface": "25",
-    "currentPrice": "90",
+    "currentPrice": "125",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5f7bc-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
@@ -85,7 +85,7 @@
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-2.jpg?alt=media&token=b94588c3-c6ab-42e8-b663-e04a21d63c15"
     ],
     "surface": "25",
-    "currentPrice": "90",
+    "currentPrice": "140",
     "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
@@ -116,7 +116,7 @@
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=f8bb5bfc-0975-4604-ace3-50b716f4b0dc"
     ],
     "surface": "27",
-    "currentPrice": "90",
+    "currentPrice": "180",
     "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
@@ -147,7 +147,7 @@
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-2.jpg?alt=media&token=bc47b975-d021-4283-a2bc-ed72f13216bf"
     ],
     "surface": "25",
-    "currentPrice": "90",
+    "currentPrice": "200",
     "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
@@ -179,7 +179,7 @@
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=700b6842-6e2e-4280-aac3-92b8e46877d9"
     ],
     "surface": "40",
-    "currentPrice": "90",
+    "currentPrice": "210",
     "weekendMultiplier": 1.1,
     "roomType": {
       "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
