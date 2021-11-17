@@ -3,48 +3,56 @@
         "roomTypeId": "44d5f49c-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Single Room",
         "description": "A room with the facility of single bed. It is meant for single occupancy.",
-        "capacity": 1
+        "capacity": 1,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5f6c2-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Double Room",
         "description": "A room with the facility of double bed.",
-        "capacity": 2
+        "capacity": 2,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5f7bc-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Single Deluxe Room",
         "description": "Deluxe room is well furnished. Some amenities are attached bathroom, a dressing table, a bedside table, a small writing table, a TV, and a small fridge. The floor is covered with carpet and most suitable for small families.",
-        "capacity": 1
+        "capacity": 1,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5f88e-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Double Deluxe Room",
         "description": "Deluxe room is well furnished. Some amenities are attached bathroom, a dressing table, a bedside table, a small writing table, a TV, and a small fridge. The floor is covered with carpet and most suitable for small families.",
-        "capacity": 2
+        "capacity": 2,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Double-Double Room",
         "description": "This room provides two double beds with separate headboards. It is ideal for a family with two children below 12 years.",
-        "capacity": 4
+        "capacity": 4,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5fb4a-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Twin Room",
         "description": "This room provides two single beds with separate headboards. It is meant for two independent people. It also has a single bedside table shared between the two beds.",
-        "capacity": 2
+        "capacity": 2,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5fc1c-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Studio",
         "description": "They are twin adjacent rooms: A living room with sofa, coffee table and chairs, and a bedroom. It is also equipped with fan/air conditioner, a small kitchen corner, and a dining area. The furniture is often compact.",
-        "capacity": 4
+        "capacity": 4,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     },
     {
         "roomTypeId": "44d5fcda-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Suite",
         "description": "It is composed of one or more bedrooms, a living room, and a dining area. It is excellent for the guests who prefer more space, wish to entertain their guests without interruption and giving up privacy.",
-        "capacity": 4
+        "capacity": 4,
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
     }
 ]
