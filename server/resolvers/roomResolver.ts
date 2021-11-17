@@ -23,7 +23,7 @@ export class RoomResolver {
   }
 
   @Query(() => [Room], { nullable: true })
-  async getRooms(@Arg('Filters', {nullable: true}) filters: RoomFilters) {
+  async getRooms(@Arg('Filters', { nullable: true }) filters: RoomFilters) {
     try {
 
       const query = this.repository.createQueryBuilder('room')
@@ -58,10 +58,12 @@ export class RoomResolver {
 
       if (filters.startDate || filters.endDate) {
         //available rooms for selected dates
-        query.andWhere('reservation.startDate NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
-        query.andWhere('reservation.endDate NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
-        query.orWhere('reservation.startDate IS NULL')
-        query.orWhere('reservation.endDate IS NULL')
+
+
+        query.andWhere('IFNULL(reservation.startDate, 0) NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
+        query.andWhere('IFNULL(reservation.endDate, 0) NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
+
+
       }
 
       const res = await query.getMany().catch((e) => {
