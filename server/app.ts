@@ -1,5 +1,6 @@
 // app.ts
 import express, { NextFunction, Request, Response } from 'express'
+import cors from 'cors'
 import { graphqlHTTP } from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
@@ -50,6 +51,7 @@ import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 
 
       // MIDDLEWARE
+      app.use(cors())
       app.use(express.json()) // for parsing application/json
       app.use(authMiddleware)
       app.use('/rooms', roomController.router)

@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import { Review } from './review'
+import { RoomReserved } from './roomReserved'
 import { RoomType } from './roomType'
 import { Tag } from './tag'
 
@@ -62,6 +63,9 @@ export class Room {
   @Field(type => [Review], { nullable: true })
   @OneToMany(() => Review, review => review.room)
   reviews?: Review[]
+
+  @OneToMany(() => RoomReserved, roomReserved => roomReserved.room)
+  reservations?: RoomReserved[]
 }
 
 
@@ -69,4 +73,32 @@ export class Room {
 export class RoomRelationInput {
   @Field(() => ID)
   roomId?: string
+}
+
+@InputType('RoomFilters')
+export class RoomFilters {
+
+  @Field(type => [String], { nullable: true })
+  roomTypeIds?: string[]
+
+  @Field({ nullable: true })
+  maxCapacity?: number
+
+  @Field(type => [String], { nullable: true })
+  tagIds?: string[]
+
+  @Field({nullable: true})
+  minPrice?: number
+
+  @Field({nullable: true})
+  maxPrice?: number
+
+  @Field({nullable: true})
+  roomName?: string
+
+  @Field(type => Date, {nullable: true})
+  startDate?: Date
+
+  @Field(type => Date, {nullable: true})
+  endDate?: Date
 }
