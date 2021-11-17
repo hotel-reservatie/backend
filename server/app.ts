@@ -26,6 +26,7 @@ import { customAuthChecker } from './auth/customchecker'
 import authMiddleware from './auth/firebaseAuthMiddleware'
 import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { ReservationResolver } from './resolvers/reservationResolver'
+import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
@@ -67,7 +68,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver],
+        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver],
         authChecker: customAuthChecker
       }).then(_ => {
         schema = _
