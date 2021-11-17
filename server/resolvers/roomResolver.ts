@@ -1,6 +1,6 @@
 import { Arg, Query, Resolver } from 'type-graphql'
 import { getRepository, Repository } from 'typeorm'
-import { Room } from '../entity/room'
+import { Room, RoomFilters } from '../entity/room'
 
 @Resolver()
 export class RoomResolver {
@@ -20,6 +20,60 @@ export class RoomResolver {
     })
 
     return rooms
+  }
+
+  @Query(() => [Room], { nullable: true })
+  async getRooms(@Arg('Filters', {nullable: true}) filters: RoomFilters) {
+    try {
+
+      const query = this.repository.createQueryBuilder('room')
+      query.leftJoinAndSelect('room.roomType', 'roomType')
+      query.leftJoinAndSelect('room.tags', 'tags')
+      query.leftJoinAndSelect('room.reviews', 'reviews')
+      query.leftJoinAndSelect('room.reservations', 'reservations')
+      query.leftJoinAndSelect('reservations.reservation', 'reservation')
+
+      if (filters.roomTypeIds && filters.roomTypeIds.length != 0) {
+        query.andWhere('room.roomType.roomTypeId IN (:...ids)', { ids: filters.roomTypeIds })
+      }
+
+      if (filters.maxCapacity) {
+        query.andWhere('roomType.capacity <= :cap', { cap: filters.maxCapacity })
+      }
+
+      if (filters.tagIds && filters.tagIds.length != 0) {
+        query.andWhere('room.tags.tagId IN (:...ids)', { ids: filters.tagIds })
+      }
+
+      if (filters.minPrice) {
+        query.andWhere('room.currentPrice >= :price', { price: filters.minPrice })
+      }
+      if (filters.maxPrice) {
+        query.andWhere('room.currentPrice <= :price', { price: filters.maxPrice })
+      }
+
+      if (filters.roomName) {
+        query.andWhere('room.roomName LIKE :name', { name: `%${filters.roomName}%` })
+      }
+
+      if (filters.startDate || filters.endDate) {
+        //available rooms for selected dates
+        query.andWhere('reservation.startDate NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
+        query.andWhere('reservation.endDate NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
+        query.orWhere('reservation.startDate IS NULL')
+        query.orWhere('reservation.endDate IS NULL')
+      }
+
+      const res = await query.getMany().catch((e) => {
+        throw new Error(e);
+      })
+
+      return res
+    } catch (error) {
+      throw new Error(`Could not apply filters: ${error}`)
+
+    }
+
   }
 
   @Query(() => Room, { nullable: true })
