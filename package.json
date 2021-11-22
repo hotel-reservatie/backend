@@ -8,7 +8,8 @@
     "start": "npx tsc && node dist/app.js",
     "dev": "npx nodemon --watch 'server/**/*' --exec 'ts-node' server/app.ts",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write"
+    "format": "prettier .  --write",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "firebase-admin": "^10.0.0",
     "graphql": "^15.7.2",
     "mysql": "^2.18.1",
+    "pm2": "^5.1.2",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.38",
     "typeorm-extension": "^0.3.0"
