@@ -19,9 +19,8 @@ import seedDatabase from './seeders/seeder'
 import admin, { auth } from 'firebase-admin'
 import dotenv from 'dotenv'
 
-
-
-  ; import { initializeApp } from 'firebase-admin/app'
+import credential from './auth/application-credentials.json'
+import { initializeApp, ServiceAccount } from 'firebase-admin/app'
 import { AuthController } from './controllers/auth.controller'
 import { customAuthChecker } from './auth/customchecker'
 import authMiddleware from './auth/firebaseAuthMiddleware'
@@ -36,7 +35,7 @@ import { RoomTypeResolver } from './resolvers/roomTypeResolver'
     .then(async (connection: Connection) => {
       dotenv.config()
       initializeApp({
-        credential: admin.credential.applicationDefault()
+        credential: admin.credential.cert(credential as ServiceAccount)
       })
       seedDatabase(connection)
 
