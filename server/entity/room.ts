@@ -78,6 +78,9 @@ export class RoomRelationInput {
 @InputType('RoomFilters')
 export class RoomFilters {
 
+  @Field(type => [String], {nullable: true})
+  roomIds?: string[]
+  
   @Field(type => [String], { nullable: true })
   roomTypeIds?: string[]
 
