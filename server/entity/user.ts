@@ -8,29 +8,45 @@ import { Review } from "./review";
 @Entity('user')
 export class User {
 
-    @Field()
+    @Field({nullable: true})
     @PrimaryColumn('uuid')
     userId?: string
 
-    @Field({nullable: true})
-    @Column('text', {nullable: true})
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
     firstName?: string
 
-    @Field({nullable: true})
-    @Column('text', {nullable: true})
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
     lastName?: string
 
-    @Field({nullable: true})
-    @Column('text', {nullable: true})
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
     userName?: string
-    
-    @Field({nullable: true})
-    @Column('text', {nullable: false})
+
+    @Field({ nullable: true })
+    @Column('text', { nullable: false })
     email?: string
 
-    @Field({nullable: true})
-    @Column('text', {nullable: true})
+    @Field({ nullable: true })
+    @Column('text', { nullable: false })
+    reservationEmail?: string
+
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
     phone?: string
+
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
+    address?: string
+
+    @Field({ nullable: true })
+    @Column('text', { nullable: true })
+    city?: string
+
+    @Field({ nullable: true })
+    @Column('decimal', { nullable: true })
+    postal?: number
 
     @Column('bool')
     admin?: boolean

@@ -66,7 +66,7 @@ export class RoomResolver {
 
       }
       if (filters.roomIds) {
-        query.andWhere('room.roomId = :roomId', { roomId: filters.roomIds })
+        query.andWhere('room.roomId IN (:...roomIds)', { roomIds: filters.roomIds })
       }
 
       const res = await query.getMany().catch((e) => {

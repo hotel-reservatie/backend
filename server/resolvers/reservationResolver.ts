@@ -1,8 +1,9 @@
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { getRepository, QueryFailedError, Repository } from "typeorm";
-import { Reservation, ReservationInput } from "../entity/reservation";
+import { Reservation, ReservationInput, ValidateReservationResponse } from "../entity/reservation";
 import { Room, RoomRelationInput } from "../entity/room";
 import { RoomReserved } from "../entity/roomReserved";
+import { User } from "../entity/user";
 
 
 @Resolver()
@@ -11,6 +12,7 @@ export class ReservationResolver {
 
     reservedRoomsRepository: Repository<RoomReserved> = getRepository(RoomReserved)
     roomRepository: Repository<Room> = getRepository(Room)
+    userRepository: Repository<User> = getRepository(User)
 
     @Authorized()
     @Query(() => [Reservation])
@@ -24,7 +26,17 @@ export class ReservationResolver {
     @Mutation(() => Reservation)
     async createReservation(@Ctx() context, @Arg('data') res: ReservationInput, @Arg('roomIds', type => [String]) roomIds: string[]): Promise<Reservation | undefined | null> {
         try {
-            if (await this.validateReservation(roomIds, res)) {
+            const user = await this.userRepository.findOne(context.request.currentUser.uid)
+
+            console.log(user);
+            
+
+            if (await this.validateRooms(roomIds, res) && user) {
+
+                console.log(" USER MATTIE", res.user);
+                
+                await this.userRepository.update(user.userId, res.user)
+
                 res.roomsReserved = []
                 res.totalPrice = 0
                 res.user = { userId: context.request.currentUser.uid }
@@ -57,6 +69,48 @@ export class ReservationResolver {
         }
     }
 
+    @Query(() => ValidateReservationResponse)
+    async validateReservation(@Arg('data') res: ReservationInput, @Arg('roomIds', type => [String]) roomIds: string[]) {
+        try {
+
+            const response: ValidateReservationResponse = { isValid: true, invalidRooms: [], totalPrice: 0 }
+
+            if (!res.startDate && !res.endDate) {
+                response.isValid = false;
+            } else {
+
+                let totalPrice = 0
+
+                await Promise.all(roomIds.map(async (roomId) => {
+                    if (! await this.isValidRoom(roomId, res.startDate, res.endDate)) {
+                        response.isValid = false;
+                        response.invalidRooms.push(roomId)
+                    }
+
+                    const price = await this.calculateRoomPrice(roomId, res.startDate, res.endDate)
+                    totalPrice += price
+
+
+                }))
+
+                if (response.isValid) response.totalPrice = totalPrice
+
+                response.totalDays = this.daysBetween(res.startDate, res.endDate) + 1
+                response.weekendDays = this.weekendDays(res.startDate, res.endDate)
+            }
+
+
+
+
+
+
+            return response
+
+        } catch (error) {
+
+        }
+    }
+
     @Authorized()
     @Mutation(() => String)
     async deleteReservation(@Arg('reservationId') reservationId: string, @Ctx() context): Promise<string> {
@@ -65,8 +119,8 @@ export class ReservationResolver {
 
             if (reservation) {
                 if (reservation.user.userId == context.request.currentUser.uid) {
-                    
-                    await this.reservedRoomsRepository.delete({reservation: {reservationId: reservationId}})
+
+                    await this.reservedRoomsRepository.delete({ reservation: { reservationId: reservationId } })
                     await this.repository.delete(reservationId)
                     return reservationId
                 }
@@ -80,7 +134,28 @@ export class ReservationResolver {
         }
     }
 
-    private async validateReservation(roomIds: string[], reservation: ReservationInput): Promise<boolean> {
+
+
+    private async isValidRoom(roomId: string, startDate: Date, endDate: Date): Promise<boolean> {
+        const reservedRooms = await this.reservedRoomsRepository.find({ relations: ['reservation', 'room'] })
+        let isValid = true
+        reservedRooms.map((r) => {
+
+            if (r.room.roomId == roomId) {
+
+                if (this.checkBetweenDates(r.reservation.startDate, r.reservation.endDate, startDate)
+                    || this.checkBetweenDates(r.reservation.startDate, r.reservation.endDate, endDate)) {
+
+                    isValid = false;
+                }
+            }
+        })
+
+
+        return isValid
+    }
+
+    private async validateRooms(roomIds: string[], reservation: ReservationInput): Promise<boolean> {
 
         const reservedRooms = await this.reservedRoomsRepository.find({ relations: ['reservation', 'room'] })
 
@@ -101,11 +176,15 @@ export class ReservationResolver {
         const room: Room = await this.roomRepository.findOne(roomId);
 
         if (room) {
-            const amountOfDays = this.daysBetween(startDate, endDate);
+
+
+            const amountOfDays = this.daysBetween(startDate, endDate) + 1;
             const amountOfWeekendDays = this.weekendDays(startDate, endDate);
 
             const amountOfWorkDays = amountOfDays - amountOfWeekendDays;
             const totalPrice = (amountOfWorkDays * room.currentPrice) + (amountOfWeekendDays * (room.currentPrice * room.weekendMultiplier))
+
+
 
             return totalPrice
         }

@@ -30,8 +30,8 @@ export class Reservation {
     @Column('datetime')
     endDate?: Date
 
-    @Field({nullable: true})
-    @Column('decimal', {nullable: true})
+    @Field({ nullable: true })
+    @Column('decimal', { nullable: true })
     totalPrice?: number
 
     @Field(type => [RoomReserved], { nullable: true })
@@ -45,4 +45,27 @@ export class Reservation {
 export class ReservationInput extends Reservation {
     @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation)
     roomsReserved?: RoomReserved[]
+}
+
+
+
+
+@ObjectType()
+@InputType('ValidateReservationResponse')
+export class ValidateReservationResponse {
+    @Field()
+    isValid?: boolean
+
+    @Field(type => [String], { nullable: true })
+    invalidRooms?: string[]
+
+    @Field()
+    totalPrice?: number
+
+    @Field({ nullable: true })
+    totalDays?: number
+
+    @Field({ nullable: true })
+    weekendDays?: number
+
 }
