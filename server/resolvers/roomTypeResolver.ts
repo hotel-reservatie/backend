@@ -23,6 +23,10 @@ export class RoomTypeResolver {
                 r.startingPrice = parseFloat(maxPrice.min)
             }
 
+            if(!r.startingPrice){
+                r.startingPrice = 0
+            }
+
             return r;
         }))
 

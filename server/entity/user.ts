@@ -29,7 +29,7 @@ export class User {
     email?: string
 
     @Field({ nullable: true })
-    @Column('text', { nullable: false })
+    @Column('text', { nullable: true })
     reservationEmail?: string
 
     @Field({ nullable: true })

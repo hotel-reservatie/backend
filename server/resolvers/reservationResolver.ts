@@ -17,9 +17,16 @@ export class ReservationResolver {
     @Authorized()
     @Query(() => [Reservation])
     async getUserReservations(@Ctx() context): Promise<Reservation[] | undefined | null> {
-        const reservations = await this.repository.find({ where: { user: context.request.currentUser.uid }, relations: ['roomsReserved', 'roomsReserved.room', 'user'] })
+        try{
 
-        return reservations
+            const reservations = await this.repository.find({ where: { user: context.request.currentUser.uid }, relations: ['roomsReserved', 'roomsReserved.room', 'user', 'roomsReserved.room.roomType'], order: {createdAt: "ASC"} })
+            
+            return reservations
+        } catch(e){
+            throw new Error(
+                `Failed to fetch reservations. ` + e,
+            )
+        }
     }
 
     @Authorized()
@@ -28,23 +35,23 @@ export class ReservationResolver {
         try {
             const user = await this.userRepository.findOne(context.request.currentUser.uid)
 
-            console.log(user);
-            
+            console.log(res);
 
             if (await this.validateRooms(roomIds, res) && user) {
 
-                console.log(" USER MATTIE", res.user);
-                
                 await this.userRepository.update(user.userId, res.user)
 
                 res.roomsReserved = []
-                res.totalPrice = 0
                 res.user = { userId: context.request.currentUser.uid }
+
+                let totalPrice = 0
                 await Promise.all(roomIds.map(async (roomId) => {
                     const roomPrice = await this.calculateRoomPrice(roomId, res.startDate, res.endDate);
                     res.roomsReserved.push({ room: { roomId: roomId }, price: roomPrice })
-                    res.totalPrice += roomPrice
+                    totalPrice += roomPrice
                 }))
+
+                res.totalPrice = totalPrice;
 
                 const result = await this.repository
                     .save(res)

@@ -34,6 +34,10 @@ export class Reservation {
     @Column('decimal', { nullable: true })
     totalPrice?: number
 
+    @Field({ nullable: true })
+    @Column('decimal', { nullable: true })
+    totalAmountOfPeople?: number
+
     @Field(type => [RoomReserved], { nullable: true })
     @OneToMany(() => RoomReserved, roomreserved => roomreserved.reservation, { cascade: true })
     roomsReserved?: RoomReserved[]

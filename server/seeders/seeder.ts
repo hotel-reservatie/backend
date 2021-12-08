@@ -60,6 +60,7 @@ const seedUsers = async () => {
       u.email = userRecord.email
       u.phone = userRecord.phoneNumber
       u.admin = userRecord.customClaims ? userRecord.customClaims.admin : false
+      
 
       await userRepository.save(u)
         .then(() => console.log("Added new user to database: ", u))
