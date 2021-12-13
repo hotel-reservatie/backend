@@ -61,7 +61,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`Welcome, just know: you matter!`)
+        response.send(`Welkom, dit is veranderd automatisch`)
       })
       /**
        *
