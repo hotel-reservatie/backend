@@ -32,12 +32,16 @@ export class FavoriteResolver {
     }
 
     @Authorized()
-    @Mutation(() => Favorite)
-    async addFavorite(@Ctx() context, @Arg('roomId') roomId: string): Promise<Favorite | undefined | null> {
+    @Mutation(() => String)
+    async toggleFavorite(@Arg('roomId') roomId: string, @Ctx() context): Promise<String | undefined | null> {
         try {
-            const existingFavs: Favorite[] = await this.repository.find({ where: { room: roomId } })
+            const fav = await this.repository.findOne({ where: { room: roomId, user: context.request.currentUser.uid }, relations: ['user'] })
 
-            if (existingFavs.length == 0) {
+            if (fav) {
+                await this.repository.delete(fav.favoriteId)
+
+                return fav.favoriteId
+            } else {
                 const newFav = new Favorite()
                 newFav.user = { userId: context.request.currentUser.uid }
                 newFav.room = { roomId: roomId }
@@ -46,40 +50,14 @@ export class FavoriteResolver {
                     .catch((ex: QueryFailedError) => { throw new Error(`${ex.name}, room might not exist.`) })
 
                 if (result) {
-                    return result
+                    return result.favoriteId
                 } else {
                     return undefined
                 }
             }
-
-            throw new Error('Room is already in favorites')
-
-        } catch (error) {
-            throw new Error(
-                `Failed to create new favorite ` + error,
-            )
-        }
-    }
-
-    @Authorized()
-    @Mutation(() => String)
-    async deleteFavorite(@Arg('roomId') roomId: string, @Ctx() context): Promise<String | undefined | null> {
-        try {
-            const fav = await this.repository.findOne({ where: { room: roomId }, relations: ['user'] })
-
-            if (fav) {
-                if (fav.user.userId == context.request.currentUser.uid) {
-                    await this.repository.delete(fav.favoriteId)
-
-                    return fav.favoriteId
-                }
-                throw new Error('Cannot delete a favorite that is not yours!')
-            }
-            throw new Error('Not Found')
-        } catch (error) {
-            throw new Error(
-                `Could not delete favorite ` + error,
-            )
+        } catch (e) {
+            console.log(e);
+            
         }
     }
 }

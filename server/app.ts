@@ -1,5 +1,6 @@
 // app.ts
 import express, { NextFunction, Request, Response } from 'express'
+import cors from 'cors'
 import { graphqlHTTP } from 'express-graphql'
 import { GraphQLSchema } from 'graphql'
 import { buildSchema } from 'type-graphql'
@@ -18,14 +19,15 @@ import seedDatabase from './seeders/seeder'
 import admin, { auth } from 'firebase-admin'
 import dotenv from 'dotenv'
 
-
-
-  ; import { initializeApp } from 'firebase-admin/app'
+import credential from './auth/application-credentials.json'
+import { initializeApp, ServiceAccount } from 'firebase-admin/app'
 import { AuthController } from './controllers/auth.controller'
 import { customAuthChecker } from './auth/customchecker'
 import authMiddleware from './auth/firebaseAuthMiddleware'
 import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { ReservationResolver } from './resolvers/reservationResolver'
+import { RoomTypeResolver } from './resolvers/roomTypeResolver'
+import { FilterResolver } from './resolvers/filterResolver'
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
@@ -34,7 +36,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
     .then(async (connection: Connection) => {
       dotenv.config()
       initializeApp({
-        credential: admin.credential.applicationDefault()
+        credential: admin.credential.cert(credential as ServiceAccount)
       })
       seedDatabase(connection)
 
@@ -49,6 +51,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
 
 
       // MIDDLEWARE
+      app.use(cors())
       app.use(express.json()) // for parsing application/json
       app.use(authMiddleware)
       app.use('/rooms', roomController.router)
@@ -67,7 +70,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver],
+        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver, FilterResolver],
         authChecker: customAuthChecker
       }).then(_ => {
         schema = _
