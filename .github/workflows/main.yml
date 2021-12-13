@@ -2,9 +2,9 @@ name: Workflow
 
 on:
   push:
-    branches: [ github-actions ]
+    branches: [ feature/github-actions ]
   pull_request:
-    branches: [ github-actions ]
+    branches: [ feature/github-actions ]
     
   workflow_dispatch:
 
