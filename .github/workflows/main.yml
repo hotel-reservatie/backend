@@ -25,4 +25,6 @@ jobs:
     - name: Check kubernetes
       run: kubectl get pods --namespace hotelreservaties-app
     - name: Update kubernetes image
-      run: kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+      run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api
