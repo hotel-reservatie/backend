@@ -16,5 +16,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Copy google credentials
       run: cp ~/hotel-secrets/application-credentials.json ./server/auth/application-credentials.json
-    - name: Check google credentials
-      run: cat ./server/auth/application-credentials.json
+    # - name: Check google credentials
+    #   run: cat ./server/auth/application-credentials.json
+    - name: Build docker image
+      run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api
+    - name: Push docker image
+      run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
