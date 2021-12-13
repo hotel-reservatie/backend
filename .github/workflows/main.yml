@@ -11,22 +11,20 @@ on:
 jobs:
 
   build:
-    runs-on: [self-hosted,hotel]
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
-    - name: test
-      run: echo test
-    # - name: Copy google credentials
-    #   run: cp ~/hotel-secrets/application-credentials.json ./server/auth/application-credentials.json
-    # - name: Check google credentials
-    #   run: cat ./server/auth/application-credentials.json
-    # - name: Build docker image
-    #   run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
-    # - name: Push docker image
-    #   run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
-    # - name: Check kubernetes
-    #   run: kubectl get pods --namespace hotelreservaties-app
-    # - name: Update kubernetes image
-    #   run: |
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api
+    - name: Copy google credentials
+      run: cp ~/hotel-secrets/application-credentials.json ./server/auth/application-credentials.json
+    - name: Check google credentials
+      run: cat ./server/auth/application-credentials.json
+    - name: Build docker image
+      run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
+    - name: Push docker image
+      run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
+    - name: Check kubernetes
+      run: kubectl get pods --namespace hotelreservaties-app
+    - name: Update kubernetes image
+      run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api
