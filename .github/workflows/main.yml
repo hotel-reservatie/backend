@@ -1,10 +1,12 @@
 name: Workflow
 
 on:
-  push:
-    branches: [ feature/github-actions ]
-  pull_request:
-    branches: [ feature/github-actions ]
+  # push:
+  #   branches: [ feature/github-actions ]
+  # pull_request:
+  #   branches: [ feature/github-actions ]
+  tags:
+      - 'v*.*.*'
     
   workflow_dispatch:
 
@@ -21,28 +23,22 @@ jobs:
       run: |
         echo $RELEASE_VERSION
         echo ${{ env.RELEASE_VERSION }}
-    # - name: Copy Google credentials
-    #   run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
-    #   shell: bash
-    #   env:
-    #     CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
-    # - name: Check google credentials
-    #   run: cat ./server/auth/application-credentials.json
-    # - name: Build docker image
-    #   run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api:$TAG .
-    #   env:
-    #     TAG: ${{ github.event.head_commit.message }}
-    # - name: Push docker image
-    #   run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
-    #   env:
-    #     TAG: ${{ github.event.head_commit.message }}
-    # - name: Check kubernetes
-    #   run: kubectl get pods --namespace hotelreservaties-app
-    # - name: Create or update K8 deployment
-    #   run: kubectl apply -f ./k8/api-manifest.yaml -f ./k8/mariadb-manifest.yaml
-    # - name: Update kubernetes image
-    #   run: |
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
-    #   env:
-    #     TAG: ${{ github.event.head_commit.message }}
+    - name: Copy Google credentials
+      run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
+      shell: bash
+      env:
+        CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
+    - name: Check google credentials
+      run: cat ./server/auth/application-credentials.json
+    - name: Build docker image
+      run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api:$RELEASE_VERSION .
+    - name: Push docker image
+      run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:$RELEASE_VERSION
+    - name: Check kubernetes
+      run: kubectl get pods --namespace hotelreservaties-app
+    - name: Create or update K8 deployment
+      run: kubectl apply -f ./k8/api-manifest.yaml -f ./k8/mariadb-manifest.yaml
+    - name: Update kubernetes image
+      run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:$RELEASE_VERSION
     
