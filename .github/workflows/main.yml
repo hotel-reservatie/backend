@@ -32,5 +32,6 @@ jobs:
       run: kubectl apply -f ./k8/api-manifest.yaml
     - name: Update kubernetes image
       run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api
         kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
     
