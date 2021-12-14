@@ -28,6 +28,9 @@ import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { ReservationResolver } from './resolvers/reservationResolver'
 import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 import { FilterResolver } from './resolvers/filterResolver'
+
+
+
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
@@ -61,7 +64,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`Welcome, just know: you matter!`)
+        response.send(`This has been updated automatically via github actions 0.0.2`)
       })
       /**
        *

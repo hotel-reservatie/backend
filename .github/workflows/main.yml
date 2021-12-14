@@ -2,22 +2,47 @@ name: Workflow
 
 on:
   push:
-    branches: [ master ]
+    branches: [ feature/github-actions ]
   pull_request:
-    branches: [ master ]
+    branches: [ feature/github-actions ]
     
   workflow_dispatch:
 
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
+  Build:
+    runs-on: self-hosted
+    strategy:
+      max-parallel: 1
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
-      run: echo Add other actions to build,
-           echo test, and deploy your project.
+    - name: Set env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Test
+      run: |
+        echo $RELEASE_VERSION
+        echo ${{ env.RELEASE_VERSION }}
+    # - name: Copy Google credentials
+    #   run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
+    #   shell: bash
+    #   env:
+    #     CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
+    # - name: Check google credentials
+    #   run: cat ./server/auth/application-credentials.json
+    # - name: Build docker image
+    #   run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api:$TAG .
+    #   env:
+    #     TAG: ${{ github.event.head_commit.message }}
+    # - name: Push docker image
+    #   run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
+    #   env:
+    #     TAG: ${{ github.event.head_commit.message }}
+    # - name: Check kubernetes
+    #   run: kubectl get pods --namespace hotelreservaties-app
+    # - name: Create or update K8 deployment
+    #   run: kubectl apply -f ./k8/api-manifest.yaml -f ./k8/mariadb-manifest.yaml
+    # - name: Update kubernetes image
+    #   run: |
+    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
+    #   env:
+    #     TAG: ${{ github.event.head_commit.message }}
+    
