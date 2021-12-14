@@ -28,6 +28,9 @@ import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { ReservationResolver } from './resolvers/reservationResolver'
 import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 import { FilterResolver } from './resolvers/filterResolver'
+
+
+
 (async () => {
   const connectionOptions: ConnectionOptions = await getConnectionOptions() // This line will get the connection options from the typeorm
   createDatabase({ ifNotExist: true }, connectionOptions)
@@ -35,6 +38,9 @@ import { FilterResolver } from './resolvers/filterResolver'
     .then(createConnection)
     .then(async (connection: Connection) => {
       dotenv.config()
+      const serviceAccount: ServiceAccount = {
+        
+      }
       initializeApp({
         credential: admin.credential.cert(credential as ServiceAccount)
       })
@@ -61,7 +67,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`Welkom, dit is veranderd automatisch`)
+        response.send(`Updated automatically using github actions`)
       })
       /**
        *
