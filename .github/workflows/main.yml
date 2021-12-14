@@ -1,11 +1,8 @@
 name: Workflow
 
 on:
-  # push:
-  #   branches: [ feature/github-actions ]
-  # pull_request:
-  #   branches: [ feature/github-actions ]
-  tags:
+  push:
+    tags:
       - 'v*.*.*'
     
   workflow_dispatch:
