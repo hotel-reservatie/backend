@@ -28,7 +28,7 @@ jobs:
     - name: Update kubernetes image
       run: |
         kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
-  test auth:
+  test_auth:
     runs-on: self-hosted
     steps:
     - id: auth
