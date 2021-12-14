@@ -18,9 +18,9 @@ jobs:
     - name: Set env
       run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: Test
-        run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+      run: |
+        echo $RELEASE_VERSION
+        echo ${{ env.RELEASE_VERSION }}
     # - name: Copy Google credentials
     #   run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
     #   shell: bash
