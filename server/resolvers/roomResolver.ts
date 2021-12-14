@@ -23,6 +23,22 @@ export class RoomResolver {
   }
 
   @Query(() => [Room], { nullable: true })
+  async getAllRoomsTest(): Promise<Room[]> {
+    const rooms = await this.repository.find({
+      relations: ['roomType', 'tags'],
+      join: {
+        alias: 'room',
+        leftJoinAndSelect: {
+          "reviews": "room.reviews",
+          "user": "reviews.user"
+        }
+      }
+    })
+
+    return rooms
+  }
+
+  @Query(() => [Room], { nullable: true })
   async getRooms(@Arg('Filters', { nullable: true }) filters: RoomFilters) {
     try {
 
