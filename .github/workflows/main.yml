@@ -26,11 +26,6 @@ jobs:
       run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
     - name: Push docker image
       run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
-  Deploy:
-    runs-on: self-hosted
-    strategy:
-      max-parallel: 1
-    steps:
     - name: Check kubernetes
       run: kubectl get pods --namespace hotelreservaties-app
     - name: Create or update K8 deployment
@@ -38,3 +33,4 @@ jobs:
     - name: Update kubernetes image
       run: |
         kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+    
