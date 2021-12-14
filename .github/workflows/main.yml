@@ -25,6 +25,8 @@ jobs:
     - name: Push docker image
       run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
   Deploy:
+    runs-on: self-hosted
+    steps:
     - name: Check kubernetes
       run: kubectl get pods --namespace hotelreservaties-app
     - name: Create or update K8 deployment
