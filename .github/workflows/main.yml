@@ -9,42 +9,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Build:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
-    - name: copy google creds
-      run: |
-        echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json
-        cat ./server/auth/application-credentials.json
+    - name: Copy Google credentials
+      run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
       shell: bash
       env:
         CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
-    # - name: Copy google credentials
-    #   run: cp ~/hotel-secrets/application-credentials.json ./server/auth/application-credentials.json
-    # - name: Check google credentials
-    #   run: cat ./server/auth/application-credentials.json
-    # - name: Build docker image
-    #   run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
-    # - name: Push docker image
-    #   run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
-    # - name: Check kubernetes
-    #   run: kubectl get pods --namespace hotelreservaties-app
-    # - name: Create or update K8 deployment
-    #   run: kubectl apply -f ./k8/api-manifest.yaml
-    # - name: Update kubernetes image
-    #   run: |
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
-  # test_auth:
-  #   runs-on: self-hosted
-  #   steps:
-  #   - id: auth
-  #     uses: google-github-actions/auth@v0
-  #     with:
-  #       credentials_json: ${{ secrets.gcp_credentials }}
-
-  #   - name: Set up Cloud SDK
-  #     uses: google-github-actions/setup-gcloud@v0.3.0
-
-  #   - name: Use gcloud CLI
-  #     run: gcloud info
+    - name: Check google credentials
+      run: cat ./server/auth/application-credentials.json
+    - name: Build docker image
+      run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
+    - name: Push docker image
+      run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
+  Deploy:
+    - name: Check kubernetes
+      run: kubectl get pods --namespace hotelreservaties-app
+    - name: Create or update K8 deployment
+      run: kubectl apply -f ./k8/api-manifest.yaml
+    - name: Update kubernetes image
+      run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
