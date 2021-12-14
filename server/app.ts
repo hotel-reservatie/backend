@@ -64,7 +64,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`This has been updated automatically via github actions`)
+        response.send(`This has been updated automatically via github actions 0.0.2`)
       })
       /**
        *
