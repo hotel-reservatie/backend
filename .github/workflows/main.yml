@@ -42,7 +42,7 @@ jobs:
     - name: Check kubernetes
       run: kubectl get pods --namespace hotelreservaties-app
     - name: Create or update K8 deployment
-      run: kubectl apply -f ./k8/api-manifest.yaml -f ./k8/mariadb-manifest.yml
+      run: kubectl apply -f ./k8/api-manifest.yaml -f ./k8/mariadb-manifest.yaml
     - name: Update kubernetes image
       run: |
         kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
