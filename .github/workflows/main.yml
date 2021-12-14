@@ -34,7 +34,7 @@ jobs:
     - name: Build docker image
       run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api:$TAG .
       env:
-        TAG: ${{ github.ref }}
+        TAG: ${{ github.event.head_commit.message }}
     - name: Push docker image
       run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:latest
     # - name: Check kubernetes
