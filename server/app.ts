@@ -64,7 +64,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`Tested with new github actions pipeline!`)
+        response.send(`This has been updated automatically via github actions`)
       })
       /**
        *

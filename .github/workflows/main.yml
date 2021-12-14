@@ -39,12 +39,13 @@ jobs:
       run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
       env:
         TAG: ${{ github.event.head_commit.message }}
-    # - name: Check kubernetes
-    #   run: kubectl get pods --namespace hotelreservaties-app
-    # - name: Create or update K8 deployment
-    #   run: kubectl apply -f ./k8/api-manifest.yaml
-    # - name: Update kubernetes image
-    #   run: |
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api
-    #     kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+    - name: Check kubernetes
+      run: kubectl get pods --namespace hotelreservaties-app
+    - name: Create or update K8 deployment
+      run: kubectl apply -f ./k8/api-manifest.yaml
+    - name: Update kubernetes image
+      run: |
+        kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:$TAG
+      env:
+        TAG: ${{ github.event.head_commit.message }}
     
