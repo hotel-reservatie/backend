@@ -14,27 +14,29 @@ jobs:
     strategy:
       max-parallel: 1
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
+      # - uses: actions/checkout@v2
+      #   with:
+      #     fetch-depth: 1
 
-      - name: Build Docker image
-        uses: flownative/action-docker-build@v1
-        with:
-          tag_ref: ${{ github.ref }}
-          image_name: ghcr.io/everaertalexander/hotel-reservatie-api
-    # - uses: actions/checkout@v2
-    # - name: Copy Google credentials
-    #   run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
-    #   shell: bash
-    #   env:
-    #     CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
-    # - name: Check google credentials
-    #   run: cat ./server/auth/application-credentials.json
-    # - name: Build docker image
-    #   run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api .
-    # - name: Push docker image
-    #   run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:latest
+      # - name: Build Docker image
+      #   uses: flownative/action-docker-build@v1
+      #   with:
+      #     tag_ref: ${{ github.ref }}
+      #     image_name: ghcr.io/everaertalexander/hotel-reservatie-api
+    - uses: actions/checkout@v2
+    - name: Copy Google credentials
+      run: echo $CREDENTIALS_FILE >> ./server/auth/application-credentials.json  
+      shell: bash
+      env:
+        CREDENTIALS_FILE: ${{ secrets.gcp_credentials }}
+    - name: Check google credentials
+      run: cat ./server/auth/application-credentials.json
+    - name: Build docker image
+      run: docker build -t ghcr.io/everaertalexander/hotel-reservatie-api:$TAG .
+      env:
+        TAG: ${{ github.ref }}
+    - name: Push docker image
+      run: docker push ghcr.io/everaertalexander/hotel-reservatie-api:latest
     # - name: Check kubernetes
     #   run: kubectl get pods --namespace hotelreservaties-app
     # - name: Create or update K8 deployment
