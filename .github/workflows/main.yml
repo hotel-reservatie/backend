@@ -11,6 +11,8 @@ on:
 jobs:
   Build:
     runs-on: self-hosted
+    strategy:
+      max-parallel: 1
     steps:
     - uses: actions/checkout@v2
     - name: Copy Google credentials
@@ -26,6 +28,8 @@ jobs:
       run: docker push ghcr.io/everaertalexander/hotel-reservatie-api
   Deploy:
     runs-on: self-hosted
+    strategy:
+      max-parallel: 1
     steps:
     - name: Check kubernetes
       run: kubectl get pods --namespace hotelreservaties-app
