@@ -38,9 +38,6 @@ import { FilterResolver } from './resolvers/filterResolver'
     .then(createConnection)
     .then(async (connection: Connection) => {
       dotenv.config()
-      const serviceAccount: ServiceAccount = {
-        
-      }
       initializeApp({
         credential: admin.credential.cert(credential as ServiceAccount)
       })
