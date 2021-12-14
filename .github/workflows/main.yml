@@ -28,3 +28,15 @@ jobs:
     - name: Update kubernetes image
       run: |
         kubectl set image deployment/hotel-api hotel-api=ghcr.io/everaertalexander/hotel-reservatie-api:latest
+  test auth:
+    steps:
+    - id: auth
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: ${{ secrets.gcp_credentials }}
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v0.3.0
+
+    - name: Use gcloud CLI
+      run: gcloud info
