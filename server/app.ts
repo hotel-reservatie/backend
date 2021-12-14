@@ -67,7 +67,7 @@ import { FilterResolver } from './resolvers/filterResolver'
 
       // ROUTES
       app.get('/', (request: Request, response: Response) => {
-        response.send(`Now with credentials from secret`)
+        response.send(`Now with credentials from secret!`)
       })
       /**
        *
