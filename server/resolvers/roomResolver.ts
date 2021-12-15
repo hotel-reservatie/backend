@@ -45,11 +45,14 @@ export class RoomResolver {
         query.andWhere('room.tags.tagId IN (:...ids)', { ids: filters.tagIds })
       }
 
-      if (filters.minPrice) {
-        query.andWhere('room.currentPrice >= :price', { price: filters.minPrice })
-      }
-      if (filters.maxPrice) {
-        query.andWhere('room.currentPrice <= :price', { price: filters.maxPrice })
+      if (filters.minPrice || filters.maxPrice) {
+        if(filters.minPrice && filters.maxPrice){
+          query.andWhere('room.currentPrice BETWEEN :minprice AND :maxprice', { minprice: filters.minPrice, maxprice: filters.maxPrice })
+        } else if (filters.minPrice){
+          query.andWhere('room.currentPrice >= :price', { price: filters.minPrice })
+        } else if(filters.maxPrice){
+          query.andWhere('room.currentPrice <= :price', { price: filters.maxPrice })
+        }
       }
 
       if (filters.roomName) {
