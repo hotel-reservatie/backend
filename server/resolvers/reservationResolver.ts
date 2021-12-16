@@ -29,6 +29,29 @@ export class ReservationResolver {
         }
     }
 
+    
+    @Authorized()
+    @Query(() => Reservation)
+    async getReservation(@Ctx() context, @Arg('data') reservationId: string): Promise<Reservation | undefined | null> {
+        try{
+            const reservation = await this.repository.findOne(reservationId, {relations: ['roomsReserved', 'roomsReserved.room', 'user', 'roomsReserved.room.roomType']});
+
+            if(reservation){
+                if(reservation.user.userId == context.request.currentUser.uid){
+                    return reservation;
+                }
+                throw new Error('Cannot view a reservation that is not yours!')
+            }
+            throw new Error('Could not find reservation with id ' + reservationId)
+        }catch(e){
+            console.log(e);
+            
+            throw new Error(
+                `Failed to fetch reservation. ` + e,
+            )
+        }
+    }
+
     @Authorized()
     @Mutation(() => Reservation)
     async createReservation(@Ctx() context, @Arg('data') res: ReservationInput, @Arg('roomIds', type => [String]) roomIds: string[]): Promise<Reservation | undefined | null> {
@@ -52,6 +75,8 @@ export class ReservationResolver {
                 }))
 
                 res.totalPrice = totalPrice;
+                res.totalAmountOfDays = this.daysBetween(res.startDate, res.endDate) + 1
+                res.weekendDays = this.weekendDays(res.startDate, res.endDate)
 
                 const result = await this.repository
                     .save(res)
