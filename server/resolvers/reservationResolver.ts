@@ -44,6 +44,8 @@ export class ReservationResolver {
             }
             throw new Error('Could not find reservation with id ' + reservationId)
         }catch(e){
+            console.log(e);
+            
             throw new Error(
                 `Failed to fetch reservation. ` + e,
             )
@@ -73,6 +75,8 @@ export class ReservationResolver {
                 }))
 
                 res.totalPrice = totalPrice;
+                res.totalAmountOfDays = this.daysBetween(res.startDate, res.endDate) + 1
+                res.weekendDays = this.weekendDays(res.startDate, res.endDate)
 
                 const result = await this.repository
                     .save(res)
