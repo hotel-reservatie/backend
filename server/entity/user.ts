@@ -1,6 +1,7 @@
 import { Field, InputType, ObjectType } from "type-graphql";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Favorite } from "./favorite";
+import { Reservation } from "./reservation";
 import { Review } from "./review";
 
 @ObjectType()
@@ -51,9 +52,15 @@ export class User {
     @Column('bool')
     admin?: boolean
 
+    @Field(type => [Review], {nullable: true})
     @OneToMany(() => Review, review => review.user)
     reviews?: Review[]
 
+    @Field(type => [Favorite], {nullable: true})
     @OneToMany(() => Favorite, favorite => favorite.user)
     favorites?: Favorite[]
+
+    @Field(type => [Reservation], {nullable: true})
+    @OneToMany(() => Reservation, reservation => reservation.user)
+    reservations?: Reservation[]
 }

@@ -58,11 +58,9 @@ export class ReservationResolver {
         try {
             const user = await this.userRepository.findOne(context.request.currentUser.uid)
 
-            console.log(res);
+            
 
             if (await this.validateRooms(roomIds, res) && user) {
-
-                await this.userRepository.update(user.userId, res.user)
 
                 res.roomsReserved = []
                 res.user = { userId: context.request.currentUser.uid }
