@@ -4,20 +4,20 @@
         "typeName": "Single Room",
         "description": "A room with the facility of single bed. It is meant for single occupancy.",
         "capacity": 1,
-        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-1.jpg?alt=media&token=ffdf9d12-c36b-4a64-a9f1-e43c5ce4e36e"
     },
     {
         "roomTypeId": "44d5f6c2-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Double Room",
         "description": "A room with the facility of double bed.",
         "capacity": 2,
-        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-1.jpg?alt=media&token=e233db6b-5b3a-436b-b247-477d31c74579"
     },
     {
         "roomTypeId": "44d5fb4a-30d6-11ec-8d3d-0242ac130003",
         "typeName": "Twin Double Room",
         "description": "This room provides two single beds with separate headboards. It is meant for two independent people. It also has a single bedside table shared between the two beds.",
         "capacity": 4,
-        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-tuinzicht-1.jpg?alt=media&token=e1b44bb6-85e2-423e-ad17-45acf7eb7225"
+        "sampleImage": "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-1.jpg?alt=media&token=63c3a48f-c9b2-4d3c-9d22-c8bf0426c94d"
     }
 ]
