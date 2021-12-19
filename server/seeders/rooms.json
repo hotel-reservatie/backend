@@ -65,7 +65,7 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-1.jpg?alt=media&token=1dc6fe7c-98ec-4ad0-8545-21e8e8c979c6",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=3c6c23d4-f946-46b6-9c69-5cc78306ea98"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=aa7e31c3-f0a5-44f6-98f2-7edaf25f0c6e"
     ],
     "surface": "25",
     "currentPrice": "125",
@@ -104,7 +104,7 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-1.jpg?alt=media&token=ffdf9d12-c36b-4a64-a9f1-e43c5ce4e36e",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-2.jpg?alt=media&token=b94588c3-c6ab-42e8-b663-e04a21d63c15"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinuitzicht-2.jpg?alt=media&token=e1e84360-f725-45c4-8fef-7236bc6aeeb9"
     ],
     "surface": "25",
     "currentPrice": "140",
@@ -143,7 +143,7 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-1.jpg?alt=media&token=e233db6b-5b3a-436b-b247-477d31c74579",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=f8bb5bfc-0975-4604-ace3-50b716f4b0dc"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=c1473bb3-967d-4185-8d47-9bcc06fb979c"
     ],
     "surface": "27",
     "currentPrice": "180",
@@ -263,7 +263,7 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-1.jpg?alt=media&token=63c3a48f-c9b2-4d3c-9d22-c8bf0426c94d",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=700b6842-6e2e-4280-aac3-92b8e46877d9"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=59779bf2-ee13-419e-899a-79233636c836"
     ],
     "surface": "40",
     "currentPrice": "210",
