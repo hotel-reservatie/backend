@@ -17,21 +17,35 @@
       "wekdienst"
     ],
     "images": [
-      "familiekamer-1.jpg",
-      "familiekamer-2.jpg",
-      "familiekamer-3.jpg",
-      "familiekamer-4.jpg"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/familiekamer-1.jpg?alt=media&token=d19c7a31-3396-4537-96d7-248509a51660",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/familiekamer-2.jpg?alt=media&token=49f6dc3d-8407-4c98-8ecf-2b281b6b5f51"
     ],
     "surface": "18",
-    "currentPrice": "150",
+    "currentPrice": "175",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5fb4a-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
-        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
-        "name": "Bathroom"
+        "tagId": "923a0976-300d-11ec-901d-0242ac150003",
+        "name": "Bath"
+      },
+      {
+        "tagId": "986fbcd8-300d-11ec-901d-0242ac150003",
+        "name": "Airconditioning"
+      },
+      {
+        "tagId": "a1538cd4-300d-11ec-901d-0242ac150003",
+        "name": "Free WiFi"
+      },
+      {
+        "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+        "name": "Flatscreen-Tv"
+      },
+      {
+        "tagId": "5ea60233-3e02-4434-963f-7c1c81512ea0",
+        "name": "Coffe Machine"
       }
     ]
   },
@@ -51,18 +65,26 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-1.jpg?alt=media&token=1dc6fe7c-98ec-4ad0-8545-21e8e8c979c6",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=3c6c23d4-f946-46b6-9c69-5cc78306ea98"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-2.jpg?alt=media&token=aa7e31c3-f0a5-44f6-98f2-7edaf25f0c6e"
     ],
     "surface": "25",
     "currentPrice": "125",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f7bc-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5f49c-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
-        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
-        "name": "Bathroom"
+        "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+        "name": "Flatscreen-Tv"
+      },
+      {
+        "tagId": "5ea60233-3e02-4434-963f-7c1c81512ea0",
+        "name": "Coffe Machine"
+      },
+      {
+        "tagId": "ece7a91a-834f-4f7d-b200-2053a57bca29",
+        "name": "Minibar"
       }
     ]
   },
@@ -82,18 +104,26 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-1.jpg?alt=media&token=ffdf9d12-c36b-4a64-a9f1-e43c5ce4e36e",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinzicht-2.jpg?alt=media&token=b94588c3-c6ab-42e8-b663-e04a21d63c15"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/comfort-kamer-tuinuitzicht-2.jpg?alt=media&token=e1e84360-f725-45c4-8fef-7236bc6aeeb9"
     ],
     "surface": "25",
     "currentPrice": "140",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5f49c-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
-        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
-        "name": "Bathroom"
+        "tagId": "986fbcd8-300d-11ec-901d-0242ac150003",
+        "name": "Airconditioning"
+      },
+      {
+        "tagId": "a1538cd4-300d-11ec-901d-0242ac150003",
+        "name": "Free WiFi"
+      },
+      {
+        "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+        "name": "Flatscreen-Tv"
       }
     ]
   },
@@ -113,18 +143,38 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-1.jpg?alt=media&token=e233db6b-5b3a-436b-b247-477d31c74579",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=f8bb5bfc-0975-4604-ace3-50b716f4b0dc"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/superior-kamer-2.jpg?alt=media&token=c1473bb3-967d-4185-8d47-9bcc06fb979c"
     ],
     "surface": "27",
     "currentPrice": "180",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5f6c2-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
-        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
-        "name": "Bathroom"
+        "tagId": "923a0976-300d-11ec-901d-0242ac150003",
+        "name": "Bath"
+      },
+      {
+        "tagId": "986fbcd8-300d-11ec-901d-0242ac150003",
+        "name": "Airconditioning"
+      },
+      {
+        "tagId": "a1538cd4-300d-11ec-901d-0242ac150003",
+        "name": "Free WiFi"
+      },
+      {
+        "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+        "name": "Flatscreen-Tv"
+      },
+      {
+        "tagId": "5ea60233-3e02-4434-963f-7c1c81512ea0",
+        "name": "Coffe Machine"
+      },
+      {
+        "tagId": "ece7a91a-834f-4f7d-b200-2053a57bca29",
+        "name": "Minibar"
       }
     ]
   },
@@ -150,12 +200,49 @@
     "currentPrice": "200",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5f6c2-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
         "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
         "name": "Bathroom"
+      }
+    ]
+  },
+  {
+    "roomName": "Standard Twin Room",
+    "description": "De tweepersoonskamers met 2 aparte bedden zijn ideaal voor familieverblijven en vrienden, met twee eenpersoonsbedden en ruimte voor extra opklapbedden over de 28 vierkante meter grote plattegrond.",
+    "facilities": [
+      "Badkamer met douche én ligbad",
+      "Apart toilet",
+      "Haardroger",
+      "Flatscreen TV",
+      "Minibar",
+      "Nespresso machine",
+      "Airconditioning"
+    ],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/standard-twin-room-1.PNG?alt=media&token=1e8dd0f0-493c-4ecf-b66c-034f6d922c5e",
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/standard-twin-room-2.PNG?alt=media&token=e338fd1f-a94e-4154-9889-f28b034425d9"
+    ],
+    "surface": "40",
+    "currentPrice": "130",
+    "weekendMultiplier": 1.1,
+    "roomType": {
+      "roomTypeId": "44d5fb4a-30d6-11ec-8d3d-0242ac130003"
+    },
+    "tags": [
+      {
+        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
+        "name": "Bathroom"
+      },
+      {
+        "tagId": "923a0976-300d-11ec-901d-0242ac150003",
+        "name": "Bath"
+      },
+      {
+        "tagId": "986fbcd8-300d-11ec-901d-0242ac150003",
+        "name": "Airconditioning"
       }
     ]
   },
@@ -176,18 +263,34 @@
     ],
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-1.jpg?alt=media&token=63c3a48f-c9b2-4d3c-9d22-c8bf0426c94d",
-      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=700b6842-6e2e-4280-aac3-92b8e46877d9"
+      "https://firebasestorage.googleapis.com/v0/b/advfs-hotelreservations.appspot.com/o/suite-2.jpg?alt=media&token=59779bf2-ee13-419e-899a-79233636c836"
     ],
     "surface": "40",
     "currentPrice": "210",
     "weekendMultiplier": 1.1,
     "roomType": {
-      "roomTypeId": "44d5f992-30d6-11ec-8d3d-0242ac130003"
+      "roomTypeId": "44d5fb4a-30d6-11ec-8d3d-0242ac130003"
     },
     "tags": [
       {
-        "tagId": "082bffe4-3010-11ec-8d3d-0242ac130003",
-        "name": "Bathroom"
+        "tagId": "a1538cd4-300d-11ec-901d-0242ac150003",
+        "name": "Free WiFi"
+      },
+      {
+        "tagId": "a96f0ff2-300d-11ec-901d-0242ac150003",
+        "name": "Flatscreen-Tv"
+      },
+      {
+        "tagId": "5ea60233-3e02-4434-963f-7c1c81512ea0",
+        "name": "Coffe Machine"
+      },
+      {
+        "tagId": "ece7a91a-834f-4f7d-b200-2053a57bca29",
+        "name": "Minibar"
+      },
+      {
+        "tagId": "0905c8e9-8830-4916-bc84-8a284c5c9efa",
+        "name": "Bureau"
       }
     ]
   }

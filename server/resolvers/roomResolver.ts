@@ -41,16 +41,12 @@ export class RoomResolver {
         query.andWhere('roomType.capacity <= :cap', { cap: filters.maxCapacity })
       }
 
-      if (filters.tagIds && filters.tagIds.length != 0) {
-        query.andWhere('room.tags.tagId IN (:...ids)', { ids: filters.tagIds })
-      }
-
       if (filters.minPrice || filters.maxPrice) {
-        if(filters.minPrice && filters.maxPrice){
+        if (filters.minPrice && filters.maxPrice) {
           query.andWhere('room.currentPrice BETWEEN :minprice AND :maxprice', { minprice: filters.minPrice, maxprice: filters.maxPrice })
-        } else if (filters.minPrice){
+        } else if (filters.minPrice) {
           query.andWhere('room.currentPrice >= :price', { price: filters.minPrice })
-        } else if(filters.maxPrice){
+        } else if (filters.maxPrice) {
           query.andWhere('room.currentPrice <= :price', { price: filters.maxPrice })
         }
       }
@@ -61,8 +57,6 @@ export class RoomResolver {
 
       if (filters.startDate || filters.endDate) {
         //available rooms for selected dates
-
-
         query.andWhere('IFNULL(reservation.startDate, 0) NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
         query.andWhere('IFNULL(reservation.endDate, 0) NOT BETWEEN :startDate and :endDate', { startDate: filters.startDate ? filters.startDate : null, endDate: filters.endDate ? filters.endDate : null })
 
@@ -76,7 +70,25 @@ export class RoomResolver {
         throw new Error(e);
       })
 
+      if (filters.tagIds && filters.tagIds.length != 0) {
+
+        const filteredByTag: Room[] = [];
+
+        filters.tagIds.map((tagId) => {
+          res.map((r) => {
+            const tagids = r.tags.map((t) => { return t.tagId })
+
+            if (tagids.includes(tagId)) {
+              if (filteredByTag.filter(room => room.roomId == r.roomId).length == 0) {
+                filteredByTag.push(r);
+              }
+            }
+          })
+        })
+        return filteredByTag;
+      }
       return res
+
     } catch (error) {
       throw new Error(`Could not apply filters: ${error}`)
 

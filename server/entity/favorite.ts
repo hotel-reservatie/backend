@@ -1,4 +1,4 @@
-import { Field, ID, InputType, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Room } from "./room";
 import { User } from "./user";
@@ -8,7 +8,6 @@ import { User } from "./user";
 @InputType('FavoriteInput')
 @Entity('favorite')
 export class Favorite {
-
     @Field()
     @PrimaryGeneratedColumn('uuid')
     favoriteId?: string

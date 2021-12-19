@@ -28,6 +28,7 @@ import { FavoriteResolver } from './resolvers/favoriteResolver'
 import { ReservationResolver } from './resolvers/reservationResolver'
 import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 import { FilterResolver } from './resolvers/filterResolver'
+import { UserResolver } from './resolvers/userResolver'
 
 
 
@@ -73,7 +74,7 @@ import { FilterResolver } from './resolvers/filterResolver'
       let schema: GraphQLSchema = {} as GraphQLSchema
 
       await buildSchema({
-        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver, FilterResolver],
+        resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver, FilterResolver, UserResolver],
         authChecker: customAuthChecker
       }).then(_ => {
         schema = _

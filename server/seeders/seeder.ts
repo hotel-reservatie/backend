@@ -46,6 +46,7 @@ const seedDatabase = async (connection: Connection) => {
 }
 
 const seedUsers = async () => {
+  
   const userResult = await auth().listUsers()
 
   const userRepository = getRepository(User);
