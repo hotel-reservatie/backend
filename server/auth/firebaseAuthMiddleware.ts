@@ -10,7 +10,6 @@ async function authMiddleware(
 
 
     if (!headerToken) {
-        console.log("Anonymous request");
         next()
         return
     }
@@ -23,8 +22,8 @@ async function authMiddleware(
 
     verifyToken(token)
         .then(claims => {
+
             ; (request as any).currentUser = claims
-            // console.log({ claims })
             next()
         })
         .catch(error => {

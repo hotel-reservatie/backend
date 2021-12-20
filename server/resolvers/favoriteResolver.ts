@@ -56,7 +56,7 @@ export class FavoriteResolver {
                 }
             }
         } catch (e) {
-            console.log(e);
+            throw new Error(e)
             
         }
     }

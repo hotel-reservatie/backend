@@ -1,11 +1,10 @@
-import { Arg, Query, Resolver } from 'type-graphql'
+import { Arg, Query, Resolver, UseMiddleware } from 'type-graphql'
 import { getRepository, Repository } from 'typeorm'
 import { Room, RoomFilters } from '../entity/room'
 
 @Resolver()
 export class RoomResolver {
   repository: Repository<Room> = getRepository(Room)
-
   @Query(() => [Room], { nullable: true })
   async getAllRooms(): Promise<Room[]> {
     const rooms = await this.repository.find({
@@ -91,9 +90,7 @@ export class RoomResolver {
 
     } catch (error) {
       throw new Error(`Could not apply filters: ${error}`)
-
     }
-
   }
 
   @Query(() => Room, { nullable: true })

@@ -29,7 +29,6 @@ export class ReviewResolver {
     @Ctx() context
   ): Promise<Review | undefined | null> {
 
-    console.log("Context: ", context);
 
     try {
 
