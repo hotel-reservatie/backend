@@ -8,7 +8,6 @@ async function authMiddleware(
 ) {
     const headerToken = request.headers.authorization
 
-
     if (!headerToken) {
         next()
         return

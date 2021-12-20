@@ -46,9 +46,6 @@ export class AuthController {
         u.phone = user.phoneNumber
         u.admin = customClaims.admin
 
-        console.log(u);
-        console.log(user);
-
 
 
         await this.userRepository.save(u)

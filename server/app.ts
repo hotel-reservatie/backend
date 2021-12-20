@@ -11,8 +11,6 @@ import {
   getConnectionOptions,
 } from 'typeorm'
 import { createDatabase } from 'typeorm-extension'
-import { RoomController } from './controllers/room.controller'
-import { TagController } from './controllers/tag.controller'
 import { ReviewResolver } from './resolvers/reviewResolver'
 import { RoomResolver } from './resolvers/roomResolver'
 import seedDatabase from './seeders/seeder'
@@ -46,9 +44,7 @@ import { ErrorInterceptor, LogAccess } from './logging/loggingMiddleware'
       seedDatabase(connection)
 
       // APP SETUP
-      
-      const roomController = new RoomController()
-      const tagController = new TagController()
+
       const authController = new AuthController()
       const app = express(),
         port = process.env.PORT || 3000
@@ -61,8 +57,7 @@ import { ErrorInterceptor, LogAccess } from './logging/loggingMiddleware'
       
       app.use(authMiddleware)
       app.use(LogAccess)
-      app.use('/rooms', roomController.router)
-      app.use('/tags', tagController.router)
+
       app.use('/auth', authController.router)
 
 
