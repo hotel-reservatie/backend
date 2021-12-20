@@ -29,6 +29,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
 import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 import { FilterResolver } from './resolvers/filterResolver'
 import { UserResolver } from './resolvers/userResolver'
+import { ErrorInterceptor, LogAccess } from './logging/loggingMiddleware'
 
 
 
@@ -57,7 +58,9 @@ import { UserResolver } from './resolvers/userResolver'
       // MIDDLEWARE
       app.use(cors())
       app.use(express.json()) // for parsing application/json
+      
       app.use(authMiddleware)
+      app.use(LogAccess)
       app.use('/rooms', roomController.router)
       app.use('/tags', tagController.router)
       app.use('/auth', authController.router)
@@ -75,7 +78,8 @@ import { UserResolver } from './resolvers/userResolver'
 
       await buildSchema({
         resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver, FilterResolver, UserResolver],
-        authChecker: customAuthChecker
+        globalMiddlewares: [ErrorInterceptor],
+        authChecker: customAuthChecker,
       }).then(_ => {
         schema = _
       })
@@ -89,6 +93,8 @@ import { UserResolver } from './resolvers/userResolver'
           graphiql: true,
         })),
       )
+
+      
 
       // APP START
       app.listen(port, () => {

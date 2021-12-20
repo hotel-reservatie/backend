@@ -44,7 +44,6 @@ export class ReservationResolver {
             }
             throw new Error('Could not find reservation with id ' + reservationId)
         }catch(e){
-            console.log(e);
             
             throw new Error(
                 `Failed to fetch reservation. ` + e,
