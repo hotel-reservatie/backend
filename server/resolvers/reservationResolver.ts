@@ -44,7 +44,6 @@ export class ReservationResolver {
             }
             throw new Error('Could not find reservation with id ' + reservationId)
         }catch(e){
-            console.log(e);
             
             throw new Error(
                 `Failed to fetch reservation. ` + e,
@@ -79,7 +78,6 @@ export class ReservationResolver {
                 const result = await this.repository
                     .save(res)
                     .catch((ex: QueryFailedError) => {
-                        console.log(ex);
 
                         if (ex.driverError.errno == 1452) {
                             throw new Error(`${ex.driverError.code}, one of the given rooms does not exist.`)

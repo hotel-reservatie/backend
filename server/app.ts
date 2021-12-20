@@ -11,8 +11,6 @@ import {
   getConnectionOptions,
 } from 'typeorm'
 import { createDatabase } from 'typeorm-extension'
-import { RoomController } from './controllers/room.controller'
-import { TagController } from './controllers/tag.controller'
 import { ReviewResolver } from './resolvers/reviewResolver'
 import { RoomResolver } from './resolvers/roomResolver'
 import seedDatabase from './seeders/seeder'
@@ -29,6 +27,7 @@ import { ReservationResolver } from './resolvers/reservationResolver'
 import { RoomTypeResolver } from './resolvers/roomTypeResolver'
 import { FilterResolver } from './resolvers/filterResolver'
 import { UserResolver } from './resolvers/userResolver'
+import { ErrorInterceptor, LogAccess } from './logging/loggingMiddleware'
 
 
 
@@ -45,9 +44,7 @@ import { UserResolver } from './resolvers/userResolver'
       seedDatabase(connection)
 
       // APP SETUP
-      
-      const roomController = new RoomController()
-      const tagController = new TagController()
+
       const authController = new AuthController()
       const app = express(),
         port = process.env.PORT || 3000
@@ -57,9 +54,10 @@ import { UserResolver } from './resolvers/userResolver'
       // MIDDLEWARE
       app.use(cors())
       app.use(express.json()) // for parsing application/json
+      
       app.use(authMiddleware)
-      app.use('/rooms', roomController.router)
-      app.use('/tags', tagController.router)
+      app.use(LogAccess)
+
       app.use('/auth', authController.router)
 
 
@@ -75,7 +73,8 @@ import { UserResolver } from './resolvers/userResolver'
 
       await buildSchema({
         resolvers: [RoomResolver, ReviewResolver, FavoriteResolver, ReservationResolver, RoomTypeResolver, FilterResolver, UserResolver],
-        authChecker: customAuthChecker
+        globalMiddlewares: [ErrorInterceptor],
+        authChecker: customAuthChecker,
       }).then(_ => {
         schema = _
       })
@@ -89,6 +88,8 @@ import { UserResolver } from './resolvers/userResolver'
           graphiql: true,
         })),
       )
+
+      
 
       // APP START
       app.listen(port, () => {

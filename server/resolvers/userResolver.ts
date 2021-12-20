@@ -33,7 +33,6 @@ export class UserResolver {
 
             const updatedUser = await this.repository.findOne(context.request.currentUser.uid)
 
-            console.log(updatedUser);
             
             if (updatedUser) return true
 
